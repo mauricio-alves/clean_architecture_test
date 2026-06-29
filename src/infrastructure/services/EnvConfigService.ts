@@ -15,15 +15,15 @@ export class EnvConfigService implements IConfigService {
     this.apiKey = key;
   }
 
-  public getApiKey(): string {
+  getApiKey(): string {
     return this.apiKey;
   }
 
-  public getBaseUrl(): string {
+  getBaseUrl(): string {
     return this.baseUrl;
   }
 
-  public getBaseImgUrl(): string {
+  getBaseImgUrl(): string {
     return this.baseImgUrl;
   }
 }

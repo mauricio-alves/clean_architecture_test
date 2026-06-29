@@ -13,7 +13,7 @@ export class MovieRemoteDataSource {
     private readonly configService: IConfigService
   ) {}
 
-  public async getMoviesByCategory(category: string): Promise<MovieDTO[]> {
+  async getMoviesByCategory(category: string): Promise<MovieDTO[]> {
     const apiKey = this.configService.getApiKey();
     const baseUrl = this.configService.getBaseUrl();
     const response = await this.httpClient.get<{ results: MovieDTO[] }>(
@@ -29,7 +29,7 @@ export class MovieRemoteDataSource {
     return response.results;
   }
 
-  public async getMovieDetails(id: string): Promise<MovieDTO> {
+  async getMovieDetails(id: string): Promise<MovieDTO> {
     const apiKey = this.configService.getApiKey();
     const baseUrl = this.configService.getBaseUrl();
     return this.httpClient.get<MovieDTO>(

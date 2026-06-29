@@ -13,7 +13,7 @@ export class GetMoviesByCategoryRepositoryImpl implements IGetMoviesByCategoryRe
     private readonly remoteDataSource: MovieRemoteDataSource
   ) {}
 
-  public async execute(category: string): Promise<Movie[] | AppError> {
+  async execute(category: string): Promise<Movie[] | AppError> {
     try {
       const dtos = await this.remoteDataSource.getMoviesByCategory(category);
       return MovieMapper.toEntityList(dtos);

@@ -1,4 +1,3 @@
-import React from "react";
 import { Header } from "presentation/components/organisms/Header/Header";
 import { Footer } from "presentation/components/organisms/Footer/Footer";
 import { AppRoutes } from "presentation/routes";

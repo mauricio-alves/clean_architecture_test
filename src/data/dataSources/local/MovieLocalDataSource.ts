@@ -12,7 +12,7 @@ export class MovieLocalDataSource {
     private readonly storageService: IStorageService,
   ) {}
 
-  public async getFavorites(): Promise<MovieDTO[]> {
+  async getFavorites(): Promise<MovieDTO[]> {
     const data = await this.storageService.getItem(this.storageKey);
     if (!data) {
       return [];
@@ -20,7 +20,7 @@ export class MovieLocalDataSource {
     return JSON.parse(data) as MovieDTO[];
   }
 
-  public async saveFavorites(favorites: MovieDTO[]): Promise<void> {
+  async saveFavorites(favorites: MovieDTO[]): Promise<void> {
     await this.storageService.setItem(this.storageKey, JSON.stringify(favorites));
   }
 }

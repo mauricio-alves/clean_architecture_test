@@ -13,7 +13,7 @@ export class RemoveMovieFromUserListRepositoryImpl implements IRemoveMovieFromUs
     private readonly localDataSource: MovieLocalDataSource,
   ) {}
 
-  public async execute(movieId: number): Promise<Movie[] | AppError> {
+  async execute(movieId: number): Promise<Movie[] | AppError> {
     try {
       const dtos = await this.localDataSource.getFavorites();
       const updatedDtos = dtos.filter((dto) => dto.id !== movieId);

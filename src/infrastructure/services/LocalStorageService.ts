@@ -3,15 +3,15 @@ import { IStorageService } from "data/protocols/IStorageService";
 
 @injectable()
 export class LocalStorageService implements IStorageService {
-  public async getItem(key: string): Promise<string | null> {
-    return window.localStorage.getItem(key);
+  async getItem(key: string): Promise<string | null> {
+    return globalThis.localStorage.getItem(key);
   }
 
-  public async setItem(key: string, value: string): Promise<void> {
-    window.localStorage.setItem(key, value);
+  async setItem(key: string, value: string): Promise<void> {
+    globalThis.localStorage.setItem(key, value);
   }
 
-  public async removeItem(key: string): Promise<void> {
-    window.localStorage.removeItem(key);
+  async removeItem(key: string): Promise<void> {
+    globalThis.localStorage.removeItem(key);
   }
 }

@@ -14,7 +14,7 @@ export class AxiosHttpClient implements IHttpClient {
     registerResponseInterceptor(this.client);
   }
 
-  public async get<T>(url: string, config?: { params?: Record<string, any> }): Promise<T> {
+  async get<T>(url: string, config?: { params?: Record<string, any> }): Promise<T> {
     const response = await this.client.get<T>(url, config);
     return response.data;
   }

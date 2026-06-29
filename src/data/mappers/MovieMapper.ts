@@ -2,7 +2,7 @@ import { Movie } from "domain/entities/Movie";
 import { MovieDTO } from "data/dtos/MovieDTO";
 
 export class MovieMapper {
-  public static toEntity(dto: MovieDTO): Movie {
+  static toEntity(dto: MovieDTO): Movie {
     return new Movie(
       dto.id,
       dto.title,
@@ -16,11 +16,11 @@ export class MovieMapper {
     );
   }
 
-  public static toEntityList(dtos: MovieDTO[]): Movie[] {
+  static toEntityList(dtos: MovieDTO[]): Movie[] {
     return dtos.map(MovieMapper.toEntity);
   }
 
-  public static toDTO(entity: Movie): MovieDTO {
+  static toDTO(entity: Movie): MovieDTO {
     return {
       id: entity.id,
       title: entity.title,
@@ -34,7 +34,7 @@ export class MovieMapper {
     };
   }
 
-  public static toDTOList(entities: Movie[]): MovieDTO[] {
+  static toDTOList(entities: Movie[]): MovieDTO[] {
     return entities.map(MovieMapper.toDTO);
   }
 }

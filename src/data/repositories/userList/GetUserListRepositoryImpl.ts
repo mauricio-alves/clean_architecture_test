@@ -13,7 +13,7 @@ export class GetUserListRepositoryImpl implements IGetUserListRepository {
     private readonly localDataSource: MovieLocalDataSource,
   ) {}
 
-  public async execute(): Promise<Movie[] | AppError> {
+  async execute(): Promise<Movie[] | AppError> {
     try {
       const dtos = await this.localDataSource.getFavorites();
       return MovieMapper.toEntityList(dtos);

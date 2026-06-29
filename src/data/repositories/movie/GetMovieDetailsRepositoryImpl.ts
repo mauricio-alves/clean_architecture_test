@@ -13,7 +13,7 @@ export class GetMovieDetailsRepositoryImpl implements IGetMovieDetailsRepository
     private readonly remoteDataSource: MovieRemoteDataSource
   ) {}
 
-  public async execute(id: string): Promise<Movie | AppError> {
+  async execute(id: string): Promise<Movie | AppError> {
     try {
       const dto = await this.remoteDataSource.getMovieDetails(id);
       return MovieMapper.toEntity(dto);

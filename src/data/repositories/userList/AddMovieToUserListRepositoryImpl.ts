@@ -13,7 +13,7 @@ export class AddMovieToUserListRepositoryImpl implements IAddMovieToUserListRepo
     private readonly localDataSource: MovieLocalDataSource,
   ) {}
 
-  public async execute(movie: Movie): Promise<Movie[] | AppError> {
+  async execute(movie: Movie): Promise<Movie[] | AppError> {
     try {
       const dtos = await this.localDataSource.getFavorites();
       const newDto = MovieMapper.toDTO(movie);
