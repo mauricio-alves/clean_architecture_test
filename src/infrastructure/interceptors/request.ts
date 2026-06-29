@@ -1,9 +1,8 @@
 import { AxiosInstance } from "axios";
 
-export const registerRequestInterceptor = (instance: AxiosInstance): void => {
+export const requestInterceptor = (instance: AxiosInstance): void => {
   instance.interceptors.request.use(
     (config) => {
-      console.log(`[HTTP Request] ${config.method?.toUpperCase()} ${config.url}`, config.params);
       return config;
     },
     (error) => {

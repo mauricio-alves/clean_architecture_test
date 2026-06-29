@@ -1,9 +1,8 @@
 import { AxiosInstance } from "axios";
 
-export const registerResponseInterceptor = (instance: AxiosInstance): void => {
+export const responseInterceptor = (instance: AxiosInstance): void => {
   instance.interceptors.response.use(
     (response) => {
-      console.log(`[HTTP Response] ${response.status} ${response.config.url}`);
       return response;
     },
     (error) => {

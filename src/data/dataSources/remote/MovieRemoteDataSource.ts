@@ -10,36 +10,33 @@ export class MovieRemoteDataSource {
     @inject(TOKENS.IHttpClient)
     private readonly httpClient: IHttpClient,
     @inject(TOKENS.IConfigService)
-    private readonly configService: IConfigService
+    private readonly configService: IConfigService,
   ) {}
 
   async getMoviesByCategory(category: string): Promise<MovieDTO[]> {
     const apiKey = this.configService.getApiKey();
     const baseUrl = this.configService.getBaseUrl();
-    const response = await this.httpClient.get<{ results: MovieDTO[] }>(
-      `${baseUrl}/movie/${category}`,
-      {
-        params: {
-          api_key: apiKey,
-          language: "pt-BR",
-          page: 1
-        }
-      }
-    );
-    return response.results;
+    const response = await this.httpClient.get<{ results: MovieDTO[] }>({
+      url: `${baseUrl}/movie/${category}`,
+      params: {
+        api_key: apiKey,
+        language: "pt-BR",
+        page: 1,
+      },
+    });
+    return response.body.results;
   }
 
   async getMovieDetails(id: string): Promise<MovieDTO> {
     const apiKey = this.configService.getApiKey();
     const baseUrl = this.configService.getBaseUrl();
-    return this.httpClient.get<MovieDTO>(
-      `${baseUrl}/movie/${id}`,
-      {
-        params: {
-          api_key: apiKey,
-          language: "pt-BR"
-        }
-      }
-    );
+    const response = await this.httpClient.get<MovieDTO>({
+      url: `${baseUrl}/movie/${id}`,
+      params: {
+        api_key: apiKey,
+        language: "pt-BR",
+      },
+    });
+    return response.body;
   }
 }

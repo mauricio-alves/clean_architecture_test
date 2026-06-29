@@ -1,3 +1,14 @@
+export type HttpGetParams = {
+  url: string;
+  params?: Record<string, any>;
+  headers?: Record<string, string>;
+};
+
+export type HttpResponse<T> = {
+  statusCode: number;
+  body: T;
+};
+
 export interface IHttpClient {
-  get<T>(url: string, config?: { params?: Record<string, any> }): Promise<T>;
+  get<T>(params: HttpGetParams): Promise<HttpResponse<T>>;
 }
