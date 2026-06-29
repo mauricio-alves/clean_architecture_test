@@ -3,6 +3,7 @@ import { Movie } from "domain/entities/Movie";
 import { container } from "libs/inversifyjs/container";
 import { TOKENS } from "libs/inversifyjs/tokens";
 import { GetMoviesByCategory } from "domain/useCases/movie/GetMoviesByCategory";
+import AppError from "domain/errors/AppError";
 
 export const useMovies = (defaultCategory: string) => {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -11,17 +12,24 @@ export const useMovies = (defaultCategory: string) => {
 
   const getMoviesByCategory = container.get<GetMoviesByCategory>(TOKENS.GetMoviesByCategory);
 
-  const fetchMovies = useCallback(async (category: string) => {
-    try {
-      const data = await getMoviesByCategory.execute(category);
-      setMovies(data);
-      setError(null);
-    } catch (err: any) {
-      setError(err);
-    } finally {
-      setLoading(false);
-    }
-  }, [getMoviesByCategory]);
+  const fetchMovies = useCallback(
+    async (category: string) => {
+      try {
+        const response = await getMoviesByCategory.execute(category);
+        if (response instanceof AppError) {
+          setError(response);
+        } else {
+          setMovies(response.data);
+          setError(null);
+        }
+      } catch (err: any) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [getMoviesByCategory],
+  );
 
   useEffect(() => {
     fetchMovies(defaultCategory);

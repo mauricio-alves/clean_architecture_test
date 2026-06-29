@@ -4,6 +4,9 @@ import path from "path";
 
 export default defineConfig({
   envPrefix: ["VITE_"],
+  esbuild: {
+    target: "esnext",
+  },
   plugins: [
     react({
       babel: {
@@ -23,5 +26,13 @@ export default defineConfig({
       presentation: path.resolve(__dirname, "./src/presentation"),
       assets: path.resolve(__dirname, "./src/assets"),
     },
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      target: "esnext",
+    },
+  },
+  build: {
+    target: "esnext",
   },
 });

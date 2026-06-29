@@ -3,6 +3,7 @@ import { Movie } from "domain/entities/Movie";
 import { container } from "libs/inversifyjs/container";
 import { TOKENS } from "libs/inversifyjs/tokens";
 import { GetMovieDetails } from "domain/useCases/movie/GetMovieDetails";
+import AppError from "domain/errors/AppError";
 
 export const useMovieDetails = (id: string | undefined) => {
   const [movie, setMovie] = useState<Movie | null>(null);
@@ -17,9 +18,13 @@ export const useMovieDetails = (id: string | undefined) => {
     }
     async function fetchDetails() {
       try {
-        const data = await getMovieDetails.execute(id!);
-        setMovie(data);
-        setError(null);
+        const response = await getMovieDetails.execute(id!);
+        if (response instanceof AppError) {
+          setError(response);
+        } else {
+          setMovie(response.data);
+          setError(null);
+        }
       } catch (err: any) {
         setError(err);
       } finally {

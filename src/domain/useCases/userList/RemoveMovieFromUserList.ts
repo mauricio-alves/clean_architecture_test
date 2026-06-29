@@ -1,16 +1,23 @@
 import { injectable, inject } from "inversify";
 import { Movie } from "domain/entities/Movie";
-import type { IUserListRepository } from "domain/repositories/userList/IUserListRepository";
+import type { IRemoveMovieFromUserListRepository } from "domain/repositories/userList/IRemoveMovieFromUserListRepository";
 import { TOKENS } from "libs/inversifyjs/tokens";
+import { IUseCase } from "domain/useCases/IUseCase";
+import { IAPIResponse } from "domain/useCases/IAPIResponse";
+import AppError from "domain/errors/AppError";
 
 @injectable()
-export class RemoveMovieFromUserList {
+export class RemoveMovieFromUserList implements IUseCase<number, Movie[]> {
   constructor(
-    @inject(TOKENS.IUserListRepository)
-    private readonly userListRepository: IUserListRepository
+    @inject(TOKENS.IRemoveMovieFromUserListRepository)
+    private readonly removeMovieFromUserListRepository: IRemoveMovieFromUserListRepository,
   ) {}
 
-  public execute(movieId: number): Promise<Movie[]> {
-    return this.userListRepository.removeMovie(movieId);
+  async execute(movieId: number): Promise<IAPIResponse<Movie[]> | AppError> {
+    const response = await this.removeMovieFromUserListRepository.execute(movieId);
+    if (response instanceof AppError) {
+      return response;
+    }
+    return { data: response, message: "Filme removido da sua lista com sucesso!" };
   }
 }

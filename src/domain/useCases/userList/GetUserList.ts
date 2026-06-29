@@ -1,16 +1,23 @@
 import { injectable, inject } from "inversify";
 import { Movie } from "domain/entities/Movie";
-import type { IUserListRepository } from "domain/repositories/userList/IUserListRepository";
+import type { IGetUserListRepository } from "domain/repositories/userList/IGetUserListRepository";
 import { TOKENS } from "libs/inversifyjs/tokens";
+import { IUseCase } from "domain/useCases/IUseCase";
+import { IAPIResponse } from "domain/useCases/IAPIResponse";
+import AppError from "domain/errors/AppError";
 
 @injectable()
-export class GetUserList {
+export class GetUserList implements IUseCase<void, Movie[]> {
   constructor(
-    @inject(TOKENS.IUserListRepository)
-    private readonly userListRepository: IUserListRepository
+    @inject(TOKENS.IGetUserListRepository)
+    private readonly getUserListRepository: IGetUserListRepository,
   ) {}
 
-  public execute(): Promise<Movie[]> {
-    return this.userListRepository.getUserList();
+  async execute(): Promise<IAPIResponse<Movie[]> | AppError> {
+    const response = await this.getUserListRepository.execute();
+    if (response instanceof AppError) {
+      return response;
+    }
+    return { data: response };
   }
 }

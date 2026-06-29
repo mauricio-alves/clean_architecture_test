@@ -1,15 +1,22 @@
 import { ContainerModule } from "inversify";
 import { TOKENS } from "libs/inversifyjs/tokens";
 
-import type { IUserListRepository } from "domain/repositories/userList/IUserListRepository";
-import { UserListRepositoryImpl } from "data/repositories/userList/UserListRepositoryImpl";
+import type { IGetUserListRepository } from "domain/repositories/userList/IGetUserListRepository";
+import type { IAddMovieToUserListRepository } from "domain/repositories/userList/IAddMovieToUserListRepository";
+import type { IRemoveMovieFromUserListRepository } from "domain/repositories/userList/IRemoveMovieFromUserListRepository";
+
+import { GetUserListRepositoryImpl } from "data/repositories/userList/GetUserListRepositoryImpl";
+import { AddMovieToUserListRepositoryImpl } from "data/repositories/userList/AddMovieToUserListRepositoryImpl";
+import { RemoveMovieFromUserListRepositoryImpl } from "data/repositories/userList/RemoveMovieFromUserListRepositoryImpl";
 
 import { GetUserList } from "domain/useCases/userList/GetUserList";
 import { AddMovieToUserList } from "domain/useCases/userList/AddMovieToUserList";
 import { RemoveMovieFromUserList } from "domain/useCases/userList/RemoveMovieFromUserList";
 
 export const userListModule = new ContainerModule(({ bind }) => {
-  bind<IUserListRepository>(TOKENS.IUserListRepository).to(UserListRepositoryImpl);
+  bind<IGetUserListRepository>(TOKENS.IGetUserListRepository).to(GetUserListRepositoryImpl);
+  bind<IAddMovieToUserListRepository>(TOKENS.IAddMovieToUserListRepository).to(AddMovieToUserListRepositoryImpl);
+  bind<IRemoveMovieFromUserListRepository>(TOKENS.IRemoveMovieFromUserListRepository).to(RemoveMovieFromUserListRepositoryImpl);
 
   bind<GetUserList>(TOKENS.GetUserList).to(GetUserList);
   bind<AddMovieToUserList>(TOKENS.AddMovieToUserList).to(AddMovieToUserList);

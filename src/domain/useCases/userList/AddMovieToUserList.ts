@@ -1,21 +1,34 @@
 import { injectable, inject } from "inversify";
 import { Movie } from "domain/entities/Movie";
-import type { IUserListRepository } from "domain/repositories/userList/IUserListRepository";
+import type { IGetUserListRepository } from "domain/repositories/userList/IGetUserListRepository";
+import type { IAddMovieToUserListRepository } from "domain/repositories/userList/IAddMovieToUserListRepository";
 import { TOKENS } from "libs/inversifyjs/tokens";
+import { IUseCase } from "domain/useCases/IUseCase";
+import { IAPIResponse } from "domain/useCases/IAPIResponse";
+import AppError from "domain/errors/AppError";
 
 @injectable()
-export class AddMovieToUserList {
+export class AddMovieToUserList implements IUseCase<Movie, Movie[]> {
   constructor(
-    @inject(TOKENS.IUserListRepository)
-    private readonly userListRepository: IUserListRepository
+    @inject(TOKENS.IGetUserListRepository)
+    private readonly getUserListRepository: IGetUserListRepository,
+    @inject(TOKENS.IAddMovieToUserListRepository)
+    private readonly addMovieToUserListRepository: IAddMovieToUserListRepository,
   ) {}
 
-  public async execute(movie: Movie): Promise<Movie[]> {
-    const currentList = await this.userListRepository.getUserList();
-    const alreadyExists = currentList.some((item) => item.id === movie.id);
-    if (alreadyExists) {
-      throw new Error("Filme já está na sua lista!");
+  async execute(movie: Movie): Promise<IAPIResponse<Movie[]> | AppError> {
+    const currentList = await this.getUserListRepository.execute();
+    if (currentList instanceof AppError) {
+      return currentList;
     }
-    return this.userListRepository.addMovie(movie);
+    const alreadyExists = currentList.some((item: Movie) => item.id === movie.id);
+    if (alreadyExists) {
+      return new AppError("Filme já está na sua lista!");
+    }
+    const response = await this.addMovieToUserListRepository.execute(movie);
+    if (response instanceof AppError) {
+      return response;
+    }
+    return { data: response, message: "Filme adicionado à sua lista com sucesso!" };
   }
 }
