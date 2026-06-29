@@ -10,7 +10,7 @@ export const useMovies = (defaultCategory: string) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
-  const getMoviesByCategory = container.get<GetMoviesByCategory>(TOKENS.GetMoviesByCategory);
+  const getMoviesByCategory = container.get<GetMoviesByCategory>(TOKENS.IGetMoviesByCategory);
 
   const fetchMovies = useCallback(
     async (category: string) => {

@@ -18,7 +18,7 @@ export const userListModule = new ContainerModule(({ bind }) => {
   bind<IAddMovieToUserListRepository>(TOKENS.IAddMovieToUserListRepository).to(AddMovieToUserListRepositoryImpl);
   bind<IRemoveMovieFromUserListRepository>(TOKENS.IRemoveMovieFromUserListRepository).to(RemoveMovieFromUserListRepositoryImpl);
 
-  bind<GetUserList>(TOKENS.GetUserList).to(GetUserList);
-  bind<AddMovieToUserList>(TOKENS.AddMovieToUserList).to(AddMovieToUserList);
-  bind<RemoveMovieFromUserList>(TOKENS.RemoveMovieFromUserList).to(RemoveMovieFromUserList);
+  bind<GetUserList>(TOKENS.IGetUserList).to(GetUserList);
+  bind<AddMovieToUserList>(TOKENS.IAddMovieToUserList).to(AddMovieToUserList);
+  bind<RemoveMovieFromUserList>(TOKENS.IRemoveMovieFromUserList).to(RemoveMovieFromUserList);
 });

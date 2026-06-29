@@ -10,7 +10,7 @@ export const useMovieDetails = (id: string | undefined) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
-  const getMovieDetails = container.get<GetMovieDetails>(TOKENS.GetMovieDetails);
+  const getMovieDetails = container.get<GetMovieDetails>(TOKENS.IGetMovieDetails);
 
   useEffect(() => {
     if (!id) {

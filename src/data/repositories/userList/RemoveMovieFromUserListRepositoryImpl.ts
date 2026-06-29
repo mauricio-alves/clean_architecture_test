@@ -9,7 +9,7 @@ import AppError from "domain/errors/AppError";
 @injectable()
 export class RemoveMovieFromUserListRepositoryImpl implements IRemoveMovieFromUserListRepository {
   constructor(
-    @inject(TOKENS.MovieLocalDataSource)
+    @inject(TOKENS.IMovieLocalDataSource)
     private readonly localDataSource: MovieLocalDataSource,
   ) {}
 

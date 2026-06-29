@@ -9,7 +9,7 @@ import AppError from "domain/errors/AppError";
 @injectable()
 export class GetUserListRepositoryImpl implements IGetUserListRepository {
   constructor(
-    @inject(TOKENS.MovieLocalDataSource)
+    @inject(TOKENS.IMovieLocalDataSource)
     private readonly localDataSource: MovieLocalDataSource,
   ) {}
 

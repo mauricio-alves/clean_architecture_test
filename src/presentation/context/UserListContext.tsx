@@ -21,9 +21,9 @@ export const UserListProvider = ({ children }: { children: ReactNode }) => {
   const [userList, setUserList] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const getUserListUseCase = container.get<GetUserList>(TOKENS.GetUserList);
-  const addMovieToUserListUseCase = container.get<AddMovieToUserList>(TOKENS.AddMovieToUserList);
-  const removeMovieFromUserListUseCase = container.get<RemoveMovieFromUserList>(TOKENS.RemoveMovieFromUserList);
+  const getUserListUseCase = container.get<GetUserList>(TOKENS.IGetUserList);
+  const addMovieToUserListUseCase = container.get<AddMovieToUserList>(TOKENS.IAddMovieToUserList);
+  const removeMovieFromUserListUseCase = container.get<RemoveMovieFromUserList>(TOKENS.IRemoveMovieFromUserList);
 
   useEffect(() => {
     async function loadFavorites() {

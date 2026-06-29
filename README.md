@@ -16,11 +16,11 @@ O código está estruturado em 4 divisões bem delimitadas de forma a garantir i
 O núcleo do sistema. Não tem conhecimento de bancos de dados, frameworks, UI ou APIs de rede.
 * **Entities**: Estruturas de dados de negócio puras (ex: `Movie`).
 * **Use Cases**: As regras de negócio e fluxos lógicos individuais (ex: `GetMovieDetails`, `AddMovieToUserList`), executados de forma independente.
-* **Repositories (Interfaces)**: Contratos abstratos (ex: `IMovieRepository`) definindo como acessar os dados.
+* **Repositories (Interfaces)**: Contratos altamente granulares segregados (Princípio de Segregação de Interfaces - ISP) contendo um único método de execução (ex: `IGetMoviesByCategoryRepository`, `IGetUserListRepository`).
 
 ### 2. Dados (`src/data/`)
 A ponte de comunicação entre o domínio e os detalhes físicos externos.
-* **Repositories (Implementações)**: Implementações de repositórios do domínio (ex: `MovieRepositoryImpl`) que coordenam a orquestração de DataSources.
+* **Repositories (Implementações)**: Implementações independentes e com responsabilidade única (SRP) para cada contrato de domínio (ex: `GetMoviesByCategoryRepositoryImpl`).
 * **DataSources**: Interfaces e fontes concretas de dados externos (`MovieRemoteDataSource` e `MovieLocalDataSource`).
 * **Mappers & DTOs**: Conversores de dados para evitar o vazamento do modelo bruto de resposta da API do TMDb para dentro do domínio.
 * **Protocols**: Contratos abstratos de infraestrutura (ex: `IHttpClient`, `IStorageService`).
@@ -42,6 +42,14 @@ A interface de usuário que consome os casos de uso.
 A inicialização e amarração de todas as dependências são coordenadas via **InversifyJS** utilizando *Constructor Injection* tradicional nas classes concretas e casos de uso:
 * **`tokens.ts`**: Centraliza os símbolos identificadores (`TOKENS`) de injeção.
 * **`container/`**: Agrupa a definição modular de bindings do container principal (`index.ts`) dividida em sub-módulos específicos (`infrastructureModule`, `movieModule`, `userListModule`).
+
+---
+
+## 🛡️ Tratamento de Erros e Respostas de Domínio
+
+Os fluxos lógicos e Casos de Uso adotam uma abordagem puramente funcional livre de `throw` silenciosos:
+* **`IAPIResponse<T>`**: Envelope padronizado para retornos de sucesso contendo `.data` e metadados como `.message`.
+* **`AppError`**: Classe de domínio estendendo `Error` que unifica e tipa erros estruturados de negócios (suporta a interface `ICustomError` com múltiplas mensagens de validação e erros traduzidos `translatedErrors`).
 
 ---
 
