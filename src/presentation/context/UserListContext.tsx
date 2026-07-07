@@ -9,6 +9,7 @@ import { RemoveMovieFromUserList } from "domain/useCases/userList/RemoveMovieFro
 import { toast } from "react-hot-toast";
 import AppError from "domain/errors/AppError";
 import { MessageCode } from "domain/common/MessageCodes";
+import { messageCodeToI18nKey } from "utils/messageCodeToI18nKey";
 
 interface UserListContextData {
   userList: Movie[];
@@ -18,16 +19,6 @@ interface UserListContextData {
 }
 
 const UserListContext = createContext<UserListContextData>({} as UserListContextData);
-
-const messageCodeToKey = {
-  [MessageCode.MOVIE_ALREADY_IN_LIST]: "messages.MOVIE_ALREADY_IN_LIST",
-  [MessageCode.MOVIE_ADDED_TO_LIST]: "messages.MOVIE_ADDED_TO_LIST",
-  [MessageCode.MOVIE_REMOVED_FROM_LIST]: "messages.MOVIE_REMOVED_FROM_LIST",
-  [MessageCode.ERROR_ADD_MOVIE]: "messages.ERROR_ADD_MOVIE",
-  [MessageCode.ERROR_REMOVE_MOVIE]: "messages.ERROR_REMOVE_MOVIE",
-} as const;
-
-type MessageCodeKey = keyof typeof messageCodeToKey;
 
 export const UserListProvider = ({ children }: { children: ReactNode }) => {
   const [userList, setUserList] = useState<Movie[]>([]);
@@ -65,14 +56,14 @@ export const UserListProvider = ({ children }: { children: ReactNode }) => {
         } else {
           setUserList(response.data);
           if (response.messageCode) {
-            toast.success(t(messageCodeToKey[response.messageCode as MessageCodeKey]));
+            toast.success(t(messageCodeToI18nKey[response.messageCode]));
           }
         }
       } catch (error: any) {
         if (error instanceof AppError) {
           toast.error(error.message);
         } else {
-          toast.error(t(messageCodeToKey[MessageCode.ERROR_ADD_MOVIE]));
+          toast.error(t(messageCodeToI18nKey[MessageCode.ERROR_ADD_MOVIE]));
         }
       }
     },
@@ -88,14 +79,14 @@ export const UserListProvider = ({ children }: { children: ReactNode }) => {
         } else {
           setUserList(response.data);
           if (response.messageCode) {
-            toast.success(t(messageCodeToKey[response.messageCode as MessageCodeKey]));
+            toast.success(t(messageCodeToI18nKey[response.messageCode]));
           }
         }
       } catch (error: any) {
         if (error instanceof AppError) {
           toast.error(error.message);
         } else {
-          toast.error(t(messageCodeToKey[MessageCode.ERROR_REMOVE_MOVIE]));
+          toast.error(t(messageCodeToI18nKey[MessageCode.ERROR_REMOVE_MOVIE]));
         }
       }
     },

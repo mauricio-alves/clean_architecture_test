@@ -5,6 +5,7 @@ import { useConfig } from "hooks/useConfig";
 import { NotFound } from "presentation/components/molecules/NotFound/NotFound";
 import { Button } from "presentation/components/atoms/Button/Button";
 import { formatDate } from "utils/date";
+import { messageCodeToI18nKey } from "utils/messageCodeToI18nKey";
 import {
   CardContainer,
   CardImage,
@@ -52,7 +53,8 @@ export const DetailsUserListPage = () => {
           ) : (
             <ListGrid>
               {userList.map((movie) => {
-                const formattedDate = formatDate(movie.releaseDate, i18n.language);
+                const dateResult = formatDate(movie.releaseDate, i18n.language);
+                const formattedDate = dateResult.error ? t(messageCodeToI18nKey[dateResult.error]) : dateResult.value;
 
                 return (
                   <CardContainer key={movie.id}>

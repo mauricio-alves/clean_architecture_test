@@ -5,6 +5,7 @@ import { MovieRemoteDataSource } from "data/dataSources/remote/MovieRemoteDataSo
 import { MovieMapper } from "data/mappers/MovieMapper";
 import { TOKENS } from "libs/inversifyjs/tokens";
 import AppError from "domain/errors/AppError";
+import { MessageCode } from "domain/common/MessageCodes";
 
 @injectable()
 export class GetMovieDetailsRepositoryImpl implements IGetMovieDetailsRepository {
@@ -18,7 +19,10 @@ export class GetMovieDetailsRepositoryImpl implements IGetMovieDetailsRepository
       const dto = await this.remoteDataSource.getMovieDetails(id);
       return MovieMapper.toEntity(dto);
     } catch (error: any) {
-      return new AppError(error.message || "Erro ao obter detalhes do filme");
+      if (error instanceof AppError) {
+        return error;
+      }
+      return new AppError(MessageCode.ERROR_GET_MOVIE_DETAILS);
     }
   }
 }

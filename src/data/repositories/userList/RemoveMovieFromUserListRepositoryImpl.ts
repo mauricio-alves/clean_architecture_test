@@ -5,6 +5,7 @@ import { MovieLocalDataSource } from "data/dataSources/local/MovieLocalDataSourc
 import { MovieMapper } from "data/mappers/MovieMapper";
 import { TOKENS } from "libs/inversifyjs/tokens";
 import AppError from "domain/errors/AppError";
+import { MessageCode } from "domain/common/MessageCodes";
 
 @injectable()
 export class RemoveMovieFromUserListRepositoryImpl implements IRemoveMovieFromUserListRepository {
@@ -20,7 +21,10 @@ export class RemoveMovieFromUserListRepositoryImpl implements IRemoveMovieFromUs
       await this.localDataSource.saveFavorites(updatedDtos);
       return MovieMapper.toEntityList(updatedDtos);
     } catch (error: any) {
-      return new AppError(error.message || "Erro ao remover filme da lista");
+      if (error instanceof AppError) {
+        return error;
+      }
+      return new AppError(MessageCode.ERROR_REMOVE_MOVIE);
     }
   }
 }

@@ -12,7 +12,15 @@
     "MOVIE_ADDED_TO_LIST": "Filme adicionado à sua lista com sucesso!",
     "MOVIE_REMOVED_FROM_LIST": "Filme removido da sua lista com sucesso!",
     "ERROR_ADD_MOVIE": "Erro ao adicionar filme!",
-    "ERROR_REMOVE_MOVIE": "Erro ao remover filme!"
+    "ERROR_REMOVE_MOVIE": "Erro ao remover filme!",
+    "ERROR_GET_MOVIES": "Erro ao obter filmes por categoria",
+    "ERROR_GET_MOVIE_DETAILS": "Erro ao obter detalhes do filme",
+    "ERROR_GET_USER_LIST": "Erro ao obter lista de favoritos",
+    "ERROR_UNAUTHORIZED": "Acesso não autorizado! Verifique sua chave de API do TMDb.",
+    "ERROR_NOT_FOUND": "O recurso solicitado não foi encontrado.",
+    "ERROR_SERVER": "Erro no servidor da API. Tente novamente mais tarde.",
+    "ERROR_NETWORK": "Erro de conexão de rede. Verifique sua internet.",
+    "ERROR_INVALID_DATE": "Data inválida"
   },
   "header": {
     "title": "Atividade Final - iTalents"

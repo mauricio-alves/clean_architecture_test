@@ -5,6 +5,7 @@ import { MovieLocalDataSource } from "data/dataSources/local/MovieLocalDataSourc
 import { MovieMapper } from "data/mappers/MovieMapper";
 import { TOKENS } from "libs/inversifyjs/tokens";
 import AppError from "domain/errors/AppError";
+import { MessageCode } from "domain/common/MessageCodes";
 
 @injectable()
 export class GetUserListRepositoryImpl implements IGetUserListRepository {
@@ -18,7 +19,10 @@ export class GetUserListRepositoryImpl implements IGetUserListRepository {
       const dtos = await this.localDataSource.getFavorites();
       return MovieMapper.toEntityList(dtos);
     } catch (error: any) {
-      return new AppError(error.message || "Erro ao obter lista de favoritos");
+      if (error instanceof AppError) {
+        return error;
+      }
+      return new AppError(MessageCode.ERROR_GET_USER_LIST);
     }
   }
 }

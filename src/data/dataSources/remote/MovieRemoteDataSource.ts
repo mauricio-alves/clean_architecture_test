@@ -16,11 +16,12 @@ export class MovieRemoteDataSource {
   async getMoviesByCategory(category: string): Promise<MovieDTO[]> {
     const apiKey = this.configService.getApiKey();
     const baseUrl = this.configService.getBaseUrl();
+    const language = this.configService.getLanguage();
     const response = await this.httpClient.get<{ results: MovieDTO[] }>({
       url: `${baseUrl}/movie/${category}`,
       params: {
         api_key: apiKey,
-        language: "pt-BR",
+        language,
         page: 1,
       },
     });
@@ -30,11 +31,12 @@ export class MovieRemoteDataSource {
   async getMovieDetails(id: string): Promise<MovieDTO> {
     const apiKey = this.configService.getApiKey();
     const baseUrl = this.configService.getBaseUrl();
+    const language = this.configService.getLanguage();
     const response = await this.httpClient.get<MovieDTO>({
       url: `${baseUrl}/movie/${id}`,
       params: {
         api_key: apiKey,
-        language: "pt-BR",
+        language,
       },
     });
     return response.body;

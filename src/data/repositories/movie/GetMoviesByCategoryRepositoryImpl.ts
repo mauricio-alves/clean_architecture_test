@@ -5,6 +5,7 @@ import { MovieRemoteDataSource } from "data/dataSources/remote/MovieRemoteDataSo
 import { MovieMapper } from "data/mappers/MovieMapper";
 import { TOKENS } from "libs/inversifyjs/tokens";
 import AppError from "domain/errors/AppError";
+import { MessageCode } from "domain/common/MessageCodes";
 
 @injectable()
 export class GetMoviesByCategoryRepositoryImpl implements IGetMoviesByCategoryRepository {
@@ -18,7 +19,10 @@ export class GetMoviesByCategoryRepositoryImpl implements IGetMoviesByCategoryRe
       const dtos = await this.remoteDataSource.getMoviesByCategory(category);
       return MovieMapper.toEntityList(dtos);
     } catch (error: any) {
-      return new AppError(error.message || "Erro ao obter filmes por categoria");
+      if (error instanceof AppError) {
+        return error;
+      }
+      return new AppError(MessageCode.ERROR_GET_MOVIES);
     }
   }
 }

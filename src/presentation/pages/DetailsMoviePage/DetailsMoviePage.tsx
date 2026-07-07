@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useMovieDetails } from "hooks/movie/useMovieDetails";
 import { useConfig } from "hooks/useConfig";
 import { formatDate } from "utils/date";
+import { messageCodeToI18nKey } from "utils/messageCodeToI18nKey";
 import { DetailsContainer, ImageWrapper, MovieImage, InfoSection, GenresList, BackButton } from "./styles";
 
 export const DetailsMoviePage = () => {
@@ -12,13 +13,14 @@ export const DetailsMoviePage = () => {
   const { id } = useParams({ from: "/details/$id" });
   const { movie, loading, error } = useMovieDetails(id);
   const baseImgUrl = config.getBaseImgUrl();
+  const backdropImgUrl = config.getBackdropImgUrl();
 
   if (error) {
     navigate({ to: "/" });
     return null;
   }
 
-  const imgUrl = movie?.backdropPath ? `https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces/${movie.backdropPath}` : "";
+  const imgUrl = movie?.backdropPath ? `${backdropImgUrl}/${movie.backdropPath}` : "";
 
   if (loading) {
     return (
@@ -32,7 +34,8 @@ export const DetailsMoviePage = () => {
     return null;
   }
 
-  const formattedDate = formatDate(movie.releaseDate, i18n.language);
+  const dateResult = formatDate(movie.releaseDate, i18n.language);
+  const formattedDate = dateResult.error ? t(messageCodeToI18nKey[dateResult.error]) : dateResult.value;
 
   return (
     <DetailsContainer $bgImage={imgUrl}>

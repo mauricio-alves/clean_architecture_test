@@ -12,7 +12,15 @@
     "MOVIE_ADDED_TO_LIST": "Movie added to your list successfully!",
     "MOVIE_REMOVED_FROM_LIST": "Movie removed from your list successfully!",
     "ERROR_ADD_MOVIE": "Error adding movie!",
-    "ERROR_REMOVE_MOVIE": "Error removing movie!"
+    "ERROR_REMOVE_MOVIE": "Error removing movie!",
+    "ERROR_GET_MOVIES": "Error fetching movies by category",
+    "ERROR_GET_MOVIE_DETAILS": "Error fetching movie details",
+    "ERROR_GET_USER_LIST": "Error fetching user list",
+    "ERROR_UNAUTHORIZED": "Unauthorized access! Check your TMDb API key.",
+    "ERROR_NOT_FOUND": "The requested resource was not found.",
+    "ERROR_SERVER": "API server error. Please try again later.",
+    "ERROR_NETWORK": "Network connection error. Check your internet.",
+    "ERROR_INVALID_DATE": "Invalid date"
   },
   "header": {
     "title": "Final Activity - iTalents"

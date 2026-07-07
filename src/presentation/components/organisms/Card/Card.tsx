@@ -5,6 +5,7 @@ import { useUserList } from "hooks/userList/useUserList";
 import { useConfig } from "hooks/useConfig";
 import { Button } from "presentation/components/atoms/Button/Button";
 import { formatDate } from "utils/date";
+import { messageCodeToI18nKey } from "utils/messageCodeToI18nKey";
 import { CardContainer, CardImage, CardTitle, CardInfo, ButtonGroup, DetailButton } from "./styles";
 
 interface CardProps {
@@ -21,7 +22,8 @@ export const Card = ({ movie }: CardProps) => {
     await addMovie(movie);
   };
 
-  const formattedDate = formatDate(movie.releaseDate, i18n.language);
+  const dateResult = formatDate(movie.releaseDate, i18n.language);
+  const formattedDate = dateResult.error ? t(messageCodeToI18nKey[dateResult.error]) : dateResult.value;
 
   return (
     <>
