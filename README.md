@@ -48,8 +48,8 @@ A inicialização e amarração de todas as dependências são coordenadas via *
 ## 🛡️ Tratamento de Erros e Respostas de Domínio
 
 Os fluxos lógicos e Casos de Uso adotam uma abordagem puramente funcional livre de `throw` silenciosos:
-* **`IAPIResponse<T>`**: Envelope padronizado para retornos de sucesso contendo `.data` e metadados como `.message`.
-* **`AppError`**: Classe de domínio estendendo `Error` que unifica e tipa erros estruturados de negócios (suporta a interface `ICustomError` com múltiplas mensagens de validação e erros traduzidos `translatedErrors`).
+* **`IAPIResponse<T>`**: Envelope padronizado para retornos de sucesso contendo `.data` e `.messageCode`.
+* **`AppError`**: Classe de domínio estendendo `Error` que unifica e tipa erros estruturados de negócios com um `MessageCode` de domínio.
 
 ---
 
@@ -92,10 +92,11 @@ Os fluxos lógicos e Casos de Uso adotam uma abordagem puramente funcional livre
 
 ## 🛠️ Tecnologias Utilizadas
 
-* **React 19** & **TypeScript**
+* **React 18** & **TypeScript**
 * **Vite** (Build system)
 * **InversifyJS** & **reflect-metadata** (Container de IoC e Injeção de Dependências)
 * **styled-components** (Estilização in-JS)
 * **Axios** (Integração HTTP)
-* **React Router DOM v6** (Gerenciamento de rotas)
+* **TanStack Router** (Roteamento baseado em arquivos)
+* **TanStack Query** (Gerenciamento de cache e requisições assíncronas)
 * **React Hot Toast** (Notificações visuais)
