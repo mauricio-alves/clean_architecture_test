@@ -1,4 +1,3 @@
-import { Toaster } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { Movie } from "domain/entities/Movie";
 import { useUserList } from "hooks/userList/useUserList";
@@ -27,9 +26,6 @@ export const Card = ({ movie }: CardProps) => {
 
   return (
     <>
-      <div>
-        <Toaster />
-      </div>
       <CardContainer>
         <CardImage src={`${baseImgUrl}${movie.posterPath}`} alt={movie.title} />
         <CardTitle>
@@ -42,7 +38,7 @@ export const Card = ({ movie }: CardProps) => {
           {t("common.rating")} <strong>{movie.voteAverage.toFixed(1)}</strong>
         </CardInfo>
         <ButtonGroup>
-          <DetailButton to={"/details/$id" as any} params={{ id: movie.id.toString() } as any}>
+          <DetailButton to="/details/$id" params={{ id: movie.id.toString() }}>
             {t("card.detailsButton")}
           </DetailButton>
           <Button variant="add" onClick={handleAddMovie}>

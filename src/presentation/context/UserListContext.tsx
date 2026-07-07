@@ -52,7 +52,7 @@ export const UserListProvider = ({ children }: { children: ReactNode }) => {
       try {
         const response = await addMovieToUserListUseCase.execute(movie);
         if (response instanceof AppError) {
-          toast.error(response.message);
+          toast.error(t(messageCodeToI18nKey[response.messageCode]));
         } else {
           setUserList(response.data);
           if (response.messageCode) {
@@ -61,7 +61,7 @@ export const UserListProvider = ({ children }: { children: ReactNode }) => {
         }
       } catch (error: any) {
         if (error instanceof AppError) {
-          toast.error(error.message);
+          toast.error(t(messageCodeToI18nKey[error.messageCode]));
         } else {
           toast.error(t(messageCodeToI18nKey[MessageCode.ERROR_ADD_MOVIE]));
         }
@@ -75,7 +75,7 @@ export const UserListProvider = ({ children }: { children: ReactNode }) => {
       try {
         const response = await removeMovieFromUserListUseCase.execute(movieId);
         if (response instanceof AppError) {
-          toast.error(response.message);
+          toast.error(t(messageCodeToI18nKey[response.messageCode]));
         } else {
           setUserList(response.data);
           if (response.messageCode) {
@@ -84,7 +84,7 @@ export const UserListProvider = ({ children }: { children: ReactNode }) => {
         }
       } catch (error: any) {
         if (error instanceof AppError) {
-          toast.error(error.message);
+          toast.error(t(messageCodeToI18nKey[error.messageCode]));
         } else {
           toast.error(t(messageCodeToI18nKey[MessageCode.ERROR_REMOVE_MOVIE]));
         }

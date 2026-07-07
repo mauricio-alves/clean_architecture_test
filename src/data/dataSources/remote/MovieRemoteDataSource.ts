@@ -1,6 +1,6 @@
 import { injectable, inject } from "inversify";
-import type { IHttpClient } from "data/protocols/IHttpClient";
-import type { IConfigService } from "data/protocols/IConfigService";
+import type { IHttpClient } from "data/protocols/HttpClient";
+import type { IConfigService } from "data/protocols/ConfigService";
 import { MovieDTO } from "data/dtos/MovieDTO";
 import { TOKENS } from "libs/inversifyjs/tokens";
 

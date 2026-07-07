@@ -1,4 +1,4 @@
-import { IAPIResponse } from "./IAPIResponse";
+import { IAPIResponse } from "./APIResponse";
 import AppError from "domain/errors/AppError";
 
 export interface IUseCase<Input, Output> {

@@ -1,4 +1,3 @@
-import { Toaster } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useUserList } from "hooks/userList/useUserList";
 import { useConfig } from "hooks/useConfig";
@@ -34,10 +33,6 @@ export const DetailsUserListPage = () => {
 
   return (
     <>
-      <div>
-        <Toaster />
-      </div>
-
       <UserListContainer>
         <div>
           <UserListTitle>{t("myList.title")}</UserListTitle>
@@ -69,7 +64,7 @@ export const DetailsUserListPage = () => {
                       {t("common.rating")} <strong>{movie.voteAverage.toFixed(1)}</strong>
                     </CardInfo>
                     <ButtonGroup>
-                      <DetailButton to={"/details/$id" as any} params={{ id: movie.id.toString() } as any}>
+                      <DetailButton to="/details/$id" params={{ id: movie.id.toString() }}>
                         {t("card.detailsButton")}
                       </DetailButton>
                       <Button variant="delete" onClick={() => handleRemoveMovie(movie.id)}>

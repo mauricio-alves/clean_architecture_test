@@ -1,6 +1,6 @@
 import { container } from "libs/inversifyjs/container";
 import { TOKENS } from "libs/inversifyjs/tokens";
-import type { IConfigService } from "data/protocols/IConfigService";
+import type { IConfigService } from "data/protocols/ConfigService";
 
 export const useConfig = (): IConfigService => {
   return container.get<IConfigService>(TOKENS.IConfigService);

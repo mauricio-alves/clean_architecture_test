@@ -1,6 +1,6 @@
 import { injectable, inject } from "inversify";
 import { Movie } from "domain/entities/Movie";
-import type { IRemoveMovieFromUserListRepository } from "domain/repositories/userList/IRemoveMovieFromUserListRepository";
+import type { IRemoveMovieFromUserListRepository } from "domain/repositories/userList/RemoveMovieFromUserListRepository";
 import { MovieLocalDataSource } from "data/dataSources/local/MovieLocalDataSource";
 import { MovieMapper } from "data/mappers/MovieMapper";
 import { TOKENS } from "libs/inversifyjs/tokens";

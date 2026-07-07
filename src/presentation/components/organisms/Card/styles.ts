@@ -1,5 +1,6 @@
+import type { ComponentType } from "react";
 import styled from "libs/styled-components";
-import { Link } from "@tanstack/react-router";
+import { Link, type LinkComponentProps } from "@tanstack/react-router";
 
 export const CardContainer = styled.div`
   display: flex;
@@ -47,7 +48,7 @@ export const ButtonGroup = styled.div`
   padding-top: 10px;
 `;
 
-export const DetailButton = styled(Link)`
+export const DetailButton = styled(Link as ComponentType<LinkComponentProps<'a'>>)`
   padding: 5px 10px;
   border: none;
   border-radius: 5px;

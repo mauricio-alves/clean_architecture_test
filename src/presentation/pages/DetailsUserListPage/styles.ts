@@ -1,5 +1,6 @@
+import type { ComponentType } from "react";
 import styled from "libs/styled-components";
-import { Link } from "@tanstack/react-router";
+import { Link, type LinkComponentProps } from "@tanstack/react-router";
 
 export const UserListContainer = styled.div`
   display: flex;
@@ -23,7 +24,7 @@ export const BackButtonWrapper = styled.div`
   margin-bottom: 30px;
 `;
 
-export const ListBackButton = styled(Link)`
+export const ListBackButton = styled(Link as ComponentType<LinkComponentProps<'a'>>)`
   padding: 5px 10px;
   border: none;
   border-radius: 5px;

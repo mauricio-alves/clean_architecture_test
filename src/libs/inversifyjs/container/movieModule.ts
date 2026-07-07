@@ -4,8 +4,8 @@ import { TOKENS } from "libs/inversifyjs/tokens";
 import { MovieRemoteDataSource } from "data/dataSources/remote/MovieRemoteDataSource";
 import { MovieLocalDataSource } from "data/dataSources/local/MovieLocalDataSource";
 
-import type { IGetMoviesByCategoryRepository } from "domain/repositories/movie/IGetMoviesByCategoryRepository";
-import type { IGetMovieDetailsRepository } from "domain/repositories/movie/IGetMovieDetailsRepository";
+import type { IGetMoviesByCategoryRepository } from "domain/repositories/movie/GetMoviesByCategoryRepository";
+import type { IGetMovieDetailsRepository } from "domain/repositories/movie/GetMovieDetailsRepository";
 
 import { GetMoviesByCategoryRepositoryImpl } from "data/repositories/movie/GetMoviesByCategoryRepositoryImpl";
 import { GetMovieDetailsRepositoryImpl } from "data/repositories/movie/GetMovieDetailsRepositoryImpl";

@@ -21,6 +21,13 @@
       "@/*": ["./src/*"],
       "hooks/*": ["./src/presentation/hooks/*"],
       "context/*": ["./src/presentation/context/*"],
+      "data/*": ["./src/data/*"],
+      "domain/*": ["./src/domain/*"],
+      "infrastructure/*": ["./src/infrastructure/*"],
+      "libs/*": ["./src/libs/*"],
+      "presentation/*": ["./src/presentation/*"],
+      "assets/*": ["./src/assets/*"],
+      "utils/*": ["./src/utils/*"],
       "*": ["./src/*"]
     },
     "types": ["node", "vite/client"]

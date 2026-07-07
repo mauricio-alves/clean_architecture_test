@@ -1,9 +1,9 @@
 import { injectable, inject } from "inversify";
 import { Movie } from "domain/entities/Movie";
-import type { IGetUserListRepository } from "domain/repositories/userList/IGetUserListRepository";
+import type { IGetUserListRepository } from "domain/repositories/userList/GetUserListRepository";
 import { TOKENS } from "libs/inversifyjs/tokens";
-import { IUseCase } from "domain/useCases/IUseCase";
-import { IAPIResponse } from "domain/useCases/IAPIResponse";
+import { IUseCase } from "domain/useCases/UseCase";
+import { IAPIResponse } from "domain/useCases/APIResponse";
 import AppError from "domain/errors/AppError";
 
 @injectable()

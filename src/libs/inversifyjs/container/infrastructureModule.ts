@@ -1,9 +1,9 @@
 import { ContainerModule } from "inversify";
 import { TOKENS } from "libs/inversifyjs/tokens";
 
-import type { IHttpClient } from "data/protocols/IHttpClient";
-import type { IStorageService } from "data/protocols/IStorageService";
-import type { IConfigService } from "data/protocols/IConfigService";
+import type { IHttpClient } from "data/protocols/HttpClient";
+import type { IStorageService } from "data/protocols/StorageService";
+import type { IConfigService } from "data/protocols/ConfigService";
 
 import { AxiosHttpClient } from "@/infrastructure/services/AxiosHttpClient";
 import { LocalStorageService } from "@/infrastructure/services/LocalStorageService";

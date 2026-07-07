@@ -1,9 +1,9 @@
 import { injectable, inject } from "inversify";
 import { Movie } from "domain/entities/Movie";
-import type { IRemoveMovieFromUserListRepository } from "domain/repositories/userList/IRemoveMovieFromUserListRepository";
+import type { IRemoveMovieFromUserListRepository } from "domain/repositories/userList/RemoveMovieFromUserListRepository";
 import { TOKENS } from "libs/inversifyjs/tokens";
-import { IUseCase } from "domain/useCases/IUseCase";
-import { IAPIResponse } from "domain/useCases/IAPIResponse";
+import { IUseCase } from "domain/useCases/UseCase";
+import { IAPIResponse } from "domain/useCases/APIResponse";
 import AppError from "domain/errors/AppError";
 import { MessageCode } from "domain/common/MessageCodes";
 

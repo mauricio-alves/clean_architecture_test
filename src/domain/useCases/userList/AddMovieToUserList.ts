@@ -1,10 +1,10 @@
 import { injectable, inject } from "inversify";
 import { Movie } from "domain/entities/Movie";
-import type { IGetUserListRepository } from "domain/repositories/userList/IGetUserListRepository";
-import type { IAddMovieToUserListRepository } from "domain/repositories/userList/IAddMovieToUserListRepository";
+import type { IGetUserListRepository } from "domain/repositories/userList/GetUserListRepository";
+import type { IAddMovieToUserListRepository } from "domain/repositories/userList/AddMovieToUserListRepository";
 import { TOKENS } from "libs/inversifyjs/tokens";
-import { IUseCase } from "domain/useCases/IUseCase";
-import { IAPIResponse } from "domain/useCases/IAPIResponse";
+import { IUseCase } from "domain/useCases/UseCase";
+import { IAPIResponse } from "domain/useCases/APIResponse";
 import AppError from "domain/errors/AppError";
 import { MessageCode } from "domain/common/MessageCodes";
 

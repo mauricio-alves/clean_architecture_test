@@ -1,5 +1,5 @@
 import { injectable, inject } from "inversify";
-import type { IStorageService } from "data/protocols/IStorageService";
+import type { IStorageService } from "data/protocols/StorageService";
 import { MovieDTO } from "data/dtos/MovieDTO";
 import { TOKENS } from "libs/inversifyjs/tokens";
 
