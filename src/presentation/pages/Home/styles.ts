@@ -5,7 +5,7 @@ export const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #02b0c8;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const HomeTitleSection = styled.div`
@@ -33,7 +33,7 @@ export const CategoryList = styled.ul`
 `;
 
 export const CategoryItem = styled.li`
-  background-color: #02b0c8;
+  background-color: ${({ theme }) => theme.colors.primary};
   color: white;
   padding: 5px 10px;
   border-radius: 20px;
@@ -41,7 +41,7 @@ export const CategoryItem = styled.li`
   font-weight: 500;
 
   &:hover {
-    background-color: #0254c8;
+    background-color: ${({ theme }) => theme.colors.primaryHover};
   }
 `;
 
@@ -50,7 +50,7 @@ export const MiniUserList = styled.div`
   flex-direction: row;
   align-items: center;
   text-align: center;
-  color: #02b0c8;
+  color: ${({ theme }) => theme.colors.primary};
   max-width: 250px;
   padding: 0;
   margin: 30px 0 10px 0;
@@ -68,7 +68,7 @@ export const MiniUserListLink = styled(Link)`
   padding: 5px 10px;
   border: none;
   border-radius: 5px;
-  background-color: #0254c8;
+  background-color: ${({ theme }) => theme.colors.primaryHover};
   color: white;
   text-decoration: none;
   font-weight: 500;
@@ -78,7 +78,7 @@ export const MiniUserListLink = styled(Link)`
   margin-top: 5px;
 
   &:hover {
-    background-color: #026cc8;
+    background-color: ${({ theme }) => theme.colors.primaryActive};
   }
 `;
 

@@ -24,7 +24,7 @@ export const DetailsMoviePage = () => {
 
   if (loading) {
     return (
-      <div style={{ display: "flex", justifyContent: "center", paddingTop: "50px", color: "#02b0c8" }}>
+      <div style={{ display: "flex", justifyContent: "center", paddingTop: "50px" }}>
         <h2>{t("common.loading")}</h2>
       </div>
     );

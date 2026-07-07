@@ -6,12 +6,12 @@ export const CardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
-  color: #02b0c8;
-  border: 1px solid #ccc;
+  color: ${({ theme }) => theme.colors.primary};
+  border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 10px;
   max-width: 300px;
   padding-bottom: 10px;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.colors.white};
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
@@ -36,7 +36,7 @@ export const CardTitle = styled.p`
 
 export const CardInfo = styled.p`
   font-size: 0.9rem;
-  color: #555555;
+  color: ${({ theme }) => theme.colors.muted};
   margin-bottom: 5px;
 `;
 
@@ -51,7 +51,7 @@ export const DetailButton = styled(Link)`
   padding: 5px 10px;
   border: none;
   border-radius: 5px;
-  background-color: #0254c8;
+  background-color: ${({ theme }) => theme.colors.primaryHover};
   color: white;
   text-decoration: none;
   font-weight: 500;
@@ -61,6 +61,6 @@ export const DetailButton = styled(Link)`
   align-items: center;
 
   &:hover {
-    background-color: #026cc8;
+    background-color: ${({ theme }) => theme.colors.primaryActive};
   }
 `;

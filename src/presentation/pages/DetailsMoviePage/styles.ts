@@ -57,7 +57,7 @@ export const BackButton = styled(Link)`
   padding: 5px 10px;
   border: none;
   border-radius: 5px;
-  background-color: #0254c8;
+  background-color: ${({ theme }) => theme.colors.primaryHover};
   color: white;
   text-decoration: none;
   font-weight: 500;
@@ -69,6 +69,6 @@ export const BackButton = styled(Link)`
   max-width: 200px;
 
   &:hover {
-    background-color: #026cc8;
+    background-color: ${({ theme }) => theme.colors.primaryActive};
   }
 `;

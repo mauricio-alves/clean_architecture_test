@@ -4,7 +4,7 @@ export const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #000023;
+  background-color: ${({ theme }) => theme.colors.dark};
   color: white;
   padding: 20px 0;
 
@@ -39,8 +39,8 @@ export const LanguageSelector = styled.div`
 
 export const LanguageButton = styled.button<{ $active: boolean }>`
   background: transparent;
-  border: 1px solid ${({ $active }) => ($active ? "#02b0c8" : "#ccc")};
-  color: ${({ $active }) => ($active ? "#02b0c8" : "white")};
+  border: 1px solid ${({ $active, theme }) => ($active ? theme.colors.primary : theme.colors.border)};
+  color: ${({ $active, theme }) => ($active ? theme.colors.primary : "white")};
   padding: 5px 10px;
   border-radius: 4px;
   cursor: pointer;
@@ -49,7 +49,7 @@ export const LanguageButton = styled.button<{ $active: boolean }>`
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    border-color: #02b0c8;
-    color: #02b0c8;
+    border-color: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.primary};
   }
 `;

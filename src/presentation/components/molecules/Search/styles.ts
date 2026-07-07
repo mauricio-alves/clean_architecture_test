@@ -14,19 +14,19 @@ export const SearchForm = styled.form`
 export const SearchInput = styled.input`
   padding: 3px 10px;
   width: 250px;
-  border: 1px solid #ccc;
+  border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 20px;
   margin-bottom: 20px;
-  color: #02b0c8;
+  color: ${({ theme }) => theme.colors.primary};
   outline: none;
 
   &::placeholder {
-    color: #02b0c8;
+    color: ${({ theme }) => theme.colors.primary};
   }
 `;
 
 export const SearchError = styled.span`
-  color: #c80202;
+  color: ${({ theme }) => theme.colors.danger};
   font-size: 12px;
   margin-top: -15px;
   margin-bottom: 15px;

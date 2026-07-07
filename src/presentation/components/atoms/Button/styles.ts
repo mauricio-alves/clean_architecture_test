@@ -10,30 +10,30 @@ export const StyledButton = styled.button<{ $variant?: "add" | "delete" | "detai
   transition: all 0.3s ease-in-out;
   font-weight: 500;
 
-  ${({ $variant }) =>
+  ${({ $variant, theme }) =>
     $variant === "add" &&
     css`
-      background-color: #058709;
+      background-color: ${theme.colors.success};
       &:hover {
-        background-color: #1cbb21;
+        background-color: ${theme.colors.successHover};
       }
     `}
 
-  ${({ $variant }) =>
+  ${({ $variant, theme }) =>
     $variant === "delete" &&
     css`
-      background-color: #c80202;
+      background-color: ${theme.colors.danger};
       &:hover {
-        background-color: #f85d5d;
+        background-color: ${theme.colors.dangerHover};
       }
     `}
 
-  ${({ $variant }) =>
+  ${({ $variant, theme }) =>
     $variant === "details" &&
     css`
-      background-color: #0254c8;
+      background-color: ${theme.colors.primaryHover};
       &:hover {
-        background-color: #026cc8;
+        background-color: ${theme.colors.primaryActive};
       }
     `}
 `;

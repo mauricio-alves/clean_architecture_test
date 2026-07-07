@@ -11,7 +11,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     margin: 0 auto;
-    background-color: #ffffff;
-    color: #333333;
+    background-color: ${({ theme }) => theme.colors.white};
+    color: ${({ theme }) => theme.colors.text};
   }
 `;

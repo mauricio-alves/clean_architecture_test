@@ -7,7 +7,7 @@ export const NotFoundContainer = styled.div`
   text-align: center;
   align-items: center;
   padding: 20px;
-  color: #02b0c8;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const NotFoundImage = styled.img`

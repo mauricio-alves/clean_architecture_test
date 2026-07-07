@@ -6,7 +6,7 @@ export const UserListContainer = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
-  color: #02b0c8;
+  color: ${({ theme }) => theme.colors.primary};
   padding: 5px;
   margin: 30px 0;
 `;
@@ -27,7 +27,7 @@ export const ListBackButton = styled(Link)`
   padding: 5px 10px;
   border: none;
   border-radius: 5px;
-  background-color: #0254c8;
+  background-color: ${({ theme }) => theme.colors.primaryHover};
   color: white;
   text-decoration: none;
   font-weight: 500;
@@ -36,7 +36,7 @@ export const ListBackButton = styled(Link)`
   display: inline-block;
 
   &:hover {
-    background-color: #026cc8;
+    background-color: ${({ theme }) => theme.colors.primaryActive};
   }
 `;
 
