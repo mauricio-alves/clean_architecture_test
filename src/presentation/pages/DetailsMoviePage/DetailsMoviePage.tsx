@@ -1,15 +1,20 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 import { useMovieDetails } from "hooks/movie/useMovieDetails";
+import { useConfig } from "hooks/useConfig";
+import { formatDate } from "utils/date";
 import { DetailsContainer, ImageWrapper, MovieImage, InfoSection, GenresList, BackButton } from "./styles";
 
 export const DetailsMoviePage = () => {
   const navigate = useNavigate();
-  const { id } = useParams<{ id: string }>();
+  const { t, i18n } = useTranslation();
+  const config = useConfig();
+  const { id } = useParams({ from: "/details/$id" });
   const { movie, loading, error } = useMovieDetails(id);
-  const baseImgUrl = "https://image.tmdb.org/t/p/w500";
+  const baseImgUrl = config.getBaseImgUrl();
 
   if (error) {
-    navigate("/error");
+    navigate({ to: "/" });
     return null;
   }
 
@@ -18,7 +23,7 @@ export const DetailsMoviePage = () => {
   if (loading) {
     return (
       <div style={{ display: "flex", justifyContent: "center", paddingTop: "50px", color: "#02b0c8" }}>
-        <h2>Carregando...</h2>
+        <h2>{t("common.loading")}</h2>
       </div>
     );
   }
@@ -26,6 +31,8 @@ export const DetailsMoviePage = () => {
   if (!movie) {
     return null;
   }
+
+  const formattedDate = formatDate(movie.releaseDate, i18n.language);
 
   return (
     <DetailsContainer $bgImage={imgUrl}>
@@ -38,23 +45,23 @@ export const DetailsMoviePage = () => {
         </h2>
         <h3>{movie.tagline}</h3>
         <p>
-          <strong>Lançamento:</strong> {new Date(movie.releaseDate).toLocaleDateString("pt-BR")}
+          <strong>{t("common.releaseDate")}</strong> {formattedDate}
         </p>
         <GenresList>
-          <strong>Gêneros:</strong>{" "}
+          <strong>{t("common.genres")}</strong>{" "}
           {movie.genres?.map((genre) => (
             <span key={genre.id}>{genre.name}.</span>
           ))}
         </GenresList>
         <p>
-          <strong>Nota: </strong>
+          <strong>{t("common.rating")} </strong>
           <span>{movie.voteAverage.toFixed(1)}</span>
         </p>
         <p>
-          <strong>Sinopse: </strong>
+          <strong>{t("common.overview")} </strong>
           {movie.overview}
         </p>
-        <BackButton to="/">Voltar para a Home</BackButton>
+        <BackButton to="/">{t("common.backToHome")}</BackButton>
       </InfoSection>
     </DetailsContainer>
   );

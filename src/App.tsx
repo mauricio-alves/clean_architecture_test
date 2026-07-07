@@ -1,14 +1,6 @@
-import { Header } from "presentation/components/organisms/Header/Header";
-import { Footer } from "presentation/components/organisms/Footer/Footer";
-import { AppRoutes } from "presentation/routes";
-import { UserListProvider } from "context/UserListContext";
+import { RouterProvider } from "@tanstack/react-router";
+import { router } from "@/router";
 
 export function App() {
-  return (
-    <UserListProvider>
-      <Header />
-      <AppRoutes />
-      <Footer />
-    </UserListProvider>
-  );
+  return <RouterProvider router={router} />;
 }

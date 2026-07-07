@@ -1,7 +1,10 @@
 import { Toaster } from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import { useUserList } from "hooks/userList/useUserList";
+import { useConfig } from "hooks/useConfig";
 import { NotFound } from "presentation/components/molecules/NotFound/NotFound";
-import { Button } from "presentation/components/atoms/Button";
+import { Button } from "presentation/components/atoms/Button/Button";
+import { formatDate } from "utils/date";
 import {
   CardContainer,
   CardImage,
@@ -19,8 +22,10 @@ import {
 } from "./styles";
 
 export const DetailsUserListPage = () => {
-  const baseImgUrl = "https://image.tmdb.org/t/p/w500";
+  const config = useConfig();
+  const baseImgUrl = config.getBaseImgUrl();
   const { userList, removeMovie } = useUserList();
+  const { t, i18n } = useTranslation();
 
   const handleRemoveMovie = async (id: number) => {
     await removeMovie(id);
@@ -34,11 +39,11 @@ export const DetailsUserListPage = () => {
 
       <UserListContainer>
         <div>
-          <UserListTitle>Esses são os filmes da sua lista!</UserListTitle>
+          <UserListTitle>{t("myList.title")}</UserListTitle>
         </div>
         <BackButtonWrapper>
           <ListBackButton to="/">
-            Voltar para a Home
+            {t("common.backToHome")}
           </ListBackButton>
         </BackButtonWrapper>
         <div style={{ width: "100%" }}>
@@ -46,26 +51,32 @@ export const DetailsUserListPage = () => {
             <NotFound />
           ) : (
             <ListGrid>
-              {userList.map((movie) => (
-                <CardContainer key={movie.id}>
-                  <CardImage src={`${baseImgUrl}${movie.posterPath}`} alt={movie.title} />
-                  <CardTitle>
-                    <strong>{movie.title}</strong>
-                  </CardTitle>
-                  <CardInfo>Lançamento: {new Date(movie.releaseDate).toLocaleDateString("pt-BR")}</CardInfo>
-                  <CardInfo>
-                    Nota: <strong>{movie.voteAverage.toFixed(1)}</strong>
-                  </CardInfo>
-                  <ButtonGroup>
-                    <DetailButton to={`/details/${movie.id}`}>
-                      Saiba mais
-                    </DetailButton>
-                    <Button variant="delete" onClick={() => handleRemoveMovie(movie.id)}>
-                      Remover da Lista
-                    </Button>
-                  </ButtonGroup>
-                </CardContainer>
-              ))}
+              {userList.map((movie) => {
+                const formattedDate = formatDate(movie.releaseDate, i18n.language);
+
+                return (
+                  <CardContainer key={movie.id}>
+                    <CardImage src={`${baseImgUrl}${movie.posterPath}`} alt={movie.title} />
+                    <CardTitle>
+                      <strong>{movie.title}</strong>
+                    </CardTitle>
+                    <CardInfo>
+                      {t("common.releaseDate")} {formattedDate}
+                    </CardInfo>
+                    <CardInfo>
+                      {t("common.rating")} <strong>{movie.voteAverage.toFixed(1)}</strong>
+                    </CardInfo>
+                    <ButtonGroup>
+                      <DetailButton to={"/details/$id" as any} params={{ id: movie.id.toString() } as any}>
+                        {t("card.detailsButton")}
+                      </DetailButton>
+                      <Button variant="delete" onClick={() => handleRemoveMovie(movie.id)}>
+                        {t("card.removeButton")}
+                      </Button>
+                    </ButtonGroup>
+                  </CardContainer>
+                );
+              })}
             </ListGrid>
           )}
         </div>

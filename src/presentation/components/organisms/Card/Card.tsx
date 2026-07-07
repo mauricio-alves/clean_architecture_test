@@ -1,7 +1,10 @@
 import { Toaster } from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import { Movie } from "domain/entities/Movie";
 import { useUserList } from "hooks/userList/useUserList";
-import { Button } from "presentation/components/atoms/Button";
+import { useConfig } from "hooks/useConfig";
+import { Button } from "presentation/components/atoms/Button/Button";
+import { formatDate } from "utils/date";
 import { CardContainer, CardImage, CardTitle, CardInfo, ButtonGroup, DetailButton } from "./styles";
 
 interface CardProps {
@@ -9,12 +12,16 @@ interface CardProps {
 }
 
 export const Card = ({ movie }: CardProps) => {
-  const baseImgUrl = "https://image.tmdb.org/t/p/w500";
+  const config = useConfig();
+  const baseImgUrl = config.getBaseImgUrl();
   const { addMovie } = useUserList();
+  const { t, i18n } = useTranslation();
 
   const handleAddMovie = async () => {
     await addMovie(movie);
   };
+
+  const formattedDate = formatDate(movie.releaseDate, i18n.language);
 
   return (
     <>
@@ -26,16 +33,18 @@ export const Card = ({ movie }: CardProps) => {
         <CardTitle>
           <strong>{movie.title}</strong>
         </CardTitle>
-        <CardInfo>Lançamento: {new Date(movie.releaseDate).toLocaleDateString("pt-BR")}</CardInfo>
         <CardInfo>
-          Nota: <strong>{movie.voteAverage.toFixed(1)}</strong>
+          {t("common.releaseDate")} {formattedDate}
+        </CardInfo>
+        <CardInfo>
+          {t("common.rating")} <strong>{movie.voteAverage.toFixed(1)}</strong>
         </CardInfo>
         <ButtonGroup>
-          <DetailButton to={`/details/${movie.id}`}>
-            Saiba mais
+          <DetailButton to={"/details/$id" as any} params={{ id: movie.id.toString() } as any}>
+            {t("card.detailsButton")}
           </DetailButton>
           <Button variant="add" onClick={handleAddMovie}>
-            Adicionar a lista
+            {t("card.addButton")}
           </Button>
         </ButtonGroup>
       </CardContainer>

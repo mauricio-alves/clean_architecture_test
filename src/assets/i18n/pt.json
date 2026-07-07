@@ -1,0 +1,56 @@
+{
+  "common": {
+    "loading": "Carregando...",
+    "backToHome": "Voltar para a Home",
+    "releaseDate": "Lançamento:",
+    "rating": "Nota:",
+    "genres": "Gêneros:",
+    "overview": "Sinopse:"
+  },
+  "messages": {
+    "MOVIE_ALREADY_IN_LIST": "Filme já está na sua lista!",
+    "MOVIE_ADDED_TO_LIST": "Filme adicionado à sua lista com sucesso!",
+    "MOVIE_REMOVED_FROM_LIST": "Filme removido da sua lista com sucesso!",
+    "ERROR_ADD_MOVIE": "Erro ao adicionar filme!",
+    "ERROR_REMOVE_MOVIE": "Erro ao remover filme!"
+  },
+  "header": {
+    "title": "Atividade Final - iTalents"
+  },
+  "footer": {
+    "credits": "Desenvolvido por"
+  },
+  "home": {
+    "title": "Catálogo de Filmes",
+    "subtitle": "Quais filmes quer ver?",
+    "myList": {
+      "title": "Sua Lista",
+      "details": "Detalhes"
+    },
+    "categories": {
+      "now_playing": "Agora no cinema",
+      "popular": "Populares",
+      "top_rated": "Melhores avaliados",
+      "upcoming": "Que estão por vir"
+    }
+  },
+  "card": {
+    "addButton": "Adicionar a lista",
+    "detailsButton": "Saiba mais",
+    "removeButton": "Remover da Lista"
+  },
+  "myList": {
+    "title": "Esses são os filmes da sua lista!"
+  },
+  "notFound": {
+    "message": "Desculpe, nenhum filme encontrado. Tente novamente!",
+    "imageAlt": "imagem de não encontrado"
+  },
+  "search": {
+    "placeholder": "Buscar filme...",
+    "error": {
+      "empty": "O campo de busca não pode estar vazio",
+      "tooLong": "O campo de busca deve ter no máximo 100 caracteres"
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
 import path from "path";
 
 export default defineConfig({
@@ -8,6 +9,10 @@ export default defineConfig({
     target: "esnext",
   },
   plugins: [
+    TanStackRouterVite({
+      routesDirectory: "./src/presentation/routes",
+      generatedRouteTree: "./src/routeTree.gen.ts",
+    }),
     react({
       babel: {
         plugins: [["babel-plugin-transform-typescript-metadata"], ["@babel/plugin-proposal-decorators", { legacy: true }], ["@babel/plugin-proposal-class-properties", { loose: true }]],
@@ -25,6 +30,7 @@ export default defineConfig({
       hooks: path.resolve(__dirname, "./src/presentation/hooks"),
       presentation: path.resolve(__dirname, "./src/presentation"),
       assets: path.resolve(__dirname, "./src/assets"),
+      utils: path.resolve(__dirname, "./src/utils"),
     },
   },
   optimizeDeps: {

@@ -3,6 +3,8 @@ import styled from "libs/styled-components";
 export const SearchContainer = styled.div`
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const SearchForm = styled.form`
@@ -21,4 +23,11 @@ export const SearchInput = styled.input`
   &::placeholder {
     color: #02b0c8;
   }
+`;
+
+export const SearchError = styled.span`
+  color: #c80202;
+  font-size: 12px;
+  margin-top: -15px;
+  margin-bottom: 15px;
 `;

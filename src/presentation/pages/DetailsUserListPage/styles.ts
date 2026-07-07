@@ -1,5 +1,5 @@
 import styled from "libs/styled-components";
-import { Link } from "react-router-dom";
+import { Link } from "@tanstack/react-router";
 
 export const UserListContainer = styled.div`
   display: flex;

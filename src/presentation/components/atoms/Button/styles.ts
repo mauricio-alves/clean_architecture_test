@@ -1,14 +1,6 @@
 import styled, { css } from "libs/styled-components";
-import { ButtonHTMLAttributes, ReactNode } from "react";
 
-export type ButtonVariant = "add" | "delete" | "details";
-
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: ReactNode;
-  variant?: ButtonVariant;
-}
-
-const StyledButton = styled.button<{ $variant?: ButtonVariant }>`
+export const StyledButton = styled.button<{ $variant?: "add" | "delete" | "details" }>`
   padding: 5px 10px;
   border: none;
   border-radius: 5px;
@@ -45,11 +37,3 @@ const StyledButton = styled.button<{ $variant?: ButtonVariant }>`
       }
     `}
 `;
-
-export const Button = ({ children, variant, ...props }: ButtonProps) => {
-  return (
-    <StyledButton $variant={variant} {...props}>
-      {children}
-    </StyledButton>
-  );
-};

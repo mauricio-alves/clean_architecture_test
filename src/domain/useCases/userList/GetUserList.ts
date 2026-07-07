@@ -13,7 +13,7 @@ export class GetUserList implements IUseCase<void, Movie[]> {
     private readonly getUserListRepository: IGetUserListRepository,
   ) {}
 
-  async execute(): Promise<IAPIResponse<Movie[]> | AppError> {
+  async execute(_input: void): Promise<IAPIResponse<Movie[]> | AppError> {
     const response = await this.getUserListRepository.execute();
     if (response instanceof AppError) {
       return response;

@@ -5,6 +5,7 @@ import { TOKENS } from "libs/inversifyjs/tokens";
 import { IUseCase } from "domain/useCases/IUseCase";
 import { IAPIResponse } from "domain/useCases/IAPIResponse";
 import AppError from "domain/errors/AppError";
+import { MessageCode } from "domain/common/MessageCodes";
 
 @injectable()
 export class RemoveMovieFromUserList implements IUseCase<number, Movie[]> {
@@ -18,6 +19,6 @@ export class RemoveMovieFromUserList implements IUseCase<number, Movie[]> {
     if (response instanceof AppError) {
       return response;
     }
-    return { data: response, message: "Filme removido da sua lista com sucesso!" };
+    return { data: response, messageCode: MessageCode.MOVIE_REMOVED_FROM_LIST };
   }
 }

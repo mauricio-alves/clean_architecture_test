@@ -1,0 +1,56 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "backToHome": "Back to Home",
+    "releaseDate": "Release Date:",
+    "rating": "Rating:",
+    "genres": "Genres:",
+    "overview": "Overview:"
+  },
+  "messages": {
+    "MOVIE_ALREADY_IN_LIST": "Movie is already in your list!",
+    "MOVIE_ADDED_TO_LIST": "Movie added to your list successfully!",
+    "MOVIE_REMOVED_FROM_LIST": "Movie removed from your list successfully!",
+    "ERROR_ADD_MOVIE": "Error adding movie!",
+    "ERROR_REMOVE_MOVIE": "Error removing movie!"
+  },
+  "header": {
+    "title": "Final Activity - iTalents"
+  },
+  "footer": {
+    "credits": "Developed by"
+  },
+  "home": {
+    "title": "Movie Catalog",
+    "subtitle": "Which movies do you want to see?",
+    "myList": {
+      "title": "Your List",
+      "details": "Details"
+    },
+    "categories": {
+      "now_playing": "Now in theaters",
+      "popular": "Popular",
+      "top_rated": "Top Rated",
+      "upcoming": "Upcoming"
+    }
+  },
+  "card": {
+    "addButton": "Add to list",
+    "detailsButton": "Learn more",
+    "removeButton": "Remove from List"
+  },
+  "myList": {
+    "title": "These are the movies in your list!"
+  },
+  "notFound": {
+    "message": "Sorry, no movies found. Try again!",
+    "imageAlt": "not found image"
+  },
+  "search": {
+    "placeholder": "Search movie...",
+    "error": {
+      "empty": "Search field cannot be empty",
+      "tooLong": "Search field must be at most 100 characters"
+    }
+  }
+}

@@ -1,6 +1,13 @@
-import { HeaderContainer, LogoImage, HeaderTitle } from "./styles";
+import { useTranslation } from "react-i18next";
+import { HeaderContainer, LogoImage, HeaderTitle, LanguageSelector, LanguageButton } from "./styles";
 
 export const Header = () => {
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+  };
+
   return (
     <HeaderContainer>
       <a href="/">
@@ -9,7 +16,15 @@ export const Header = () => {
           alt="italents logo"
         />
       </a>
-      <HeaderTitle>Atividade Final - iTalents</HeaderTitle>
+      <HeaderTitle>{t("header.title")}</HeaderTitle>
+      <LanguageSelector>
+        <LanguageButton $active={i18n.language === "pt"} onClick={() => changeLanguage("pt")}>
+          PT
+        </LanguageButton>
+        <LanguageButton $active={i18n.language === "en"} onClick={() => changeLanguage("en")}>
+          EN
+        </LanguageButton>
+      </LanguageSelector>
     </HeaderContainer>
   );
 };

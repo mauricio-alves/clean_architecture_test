@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect, ReactNode, useMemo, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { Movie } from "domain/entities/Movie";
 import { container } from "libs/inversifyjs/container";
 import { TOKENS } from "libs/inversifyjs/tokens";
@@ -7,6 +8,7 @@ import { AddMovieToUserList } from "domain/useCases/userList/AddMovieToUserList"
 import { RemoveMovieFromUserList } from "domain/useCases/userList/RemoveMovieFromUserList";
 import { toast } from "react-hot-toast";
 import AppError from "domain/errors/AppError";
+import { MessageCode } from "domain/common/MessageCodes";
 
 interface UserListContextData {
   userList: Movie[];
@@ -17,9 +19,20 @@ interface UserListContextData {
 
 const UserListContext = createContext<UserListContextData>({} as UserListContextData);
 
+const messageCodeToKey = {
+  [MessageCode.MOVIE_ALREADY_IN_LIST]: "messages.MOVIE_ALREADY_IN_LIST",
+  [MessageCode.MOVIE_ADDED_TO_LIST]: "messages.MOVIE_ADDED_TO_LIST",
+  [MessageCode.MOVIE_REMOVED_FROM_LIST]: "messages.MOVIE_REMOVED_FROM_LIST",
+  [MessageCode.ERROR_ADD_MOVIE]: "messages.ERROR_ADD_MOVIE",
+  [MessageCode.ERROR_REMOVE_MOVIE]: "messages.ERROR_REMOVE_MOVIE",
+} as const;
+
+type MessageCodeKey = keyof typeof messageCodeToKey;
+
 export const UserListProvider = ({ children }: { children: ReactNode }) => {
   const [userList, setUserList] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
+  const { t } = useTranslation();
 
   const getUserListUseCase = container.get<GetUserList>(TOKENS.IGetUserList);
   const addMovieToUserListUseCase = container.get<AddMovieToUserList>(TOKENS.IAddMovieToUserList);
@@ -28,7 +41,7 @@ export const UserListProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     async function loadFavorites() {
       try {
-        const response = await getUserListUseCase.execute();
+        const response = await getUserListUseCase.execute(undefined);
         if (response instanceof AppError) {
           console.error(response.message);
         } else {
@@ -51,17 +64,19 @@ export const UserListProvider = ({ children }: { children: ReactNode }) => {
           toast.error(response.message);
         } else {
           setUserList(response.data);
-          toast.success(response.message || "Filme adicionado à sua lista!");
+          if (response.messageCode) {
+            toast.success(t(messageCodeToKey[response.messageCode as MessageCodeKey]));
+          }
         }
       } catch (error: any) {
         if (error instanceof AppError) {
           toast.error(error.message);
         } else {
-          toast.error("Erro ao adicionar filme!");
+          toast.error(t(messageCodeToKey[MessageCode.ERROR_ADD_MOVIE]));
         }
       }
     },
-    [addMovieToUserListUseCase],
+    [addMovieToUserListUseCase, t],
   );
 
   const removeMovie = useCallback(
@@ -72,17 +87,19 @@ export const UserListProvider = ({ children }: { children: ReactNode }) => {
           toast.error(response.message);
         } else {
           setUserList(response.data);
-          toast.success(response.message || "Filme removido da sua lista!");
+          if (response.messageCode) {
+            toast.success(t(messageCodeToKey[response.messageCode as MessageCodeKey]));
+          }
         }
       } catch (error: any) {
         if (error instanceof AppError) {
           toast.error(error.message);
         } else {
-          toast.error("Erro ao remover filme!");
+          toast.error(t(messageCodeToKey[MessageCode.ERROR_REMOVE_MOVIE]));
         }
       }
     },
-    [removeMovieFromUserListUseCase],
+    [removeMovieFromUserListUseCase, t],
   );
 
   const value = useMemo(

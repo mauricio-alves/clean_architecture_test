@@ -6,6 +6,7 @@ import { TOKENS } from "libs/inversifyjs/tokens";
 import { IUseCase } from "domain/useCases/IUseCase";
 import { IAPIResponse } from "domain/useCases/IAPIResponse";
 import AppError from "domain/errors/AppError";
+import { MessageCode } from "domain/common/MessageCodes";
 
 @injectable()
 export class AddMovieToUserList implements IUseCase<Movie, Movie[]> {
@@ -23,12 +24,12 @@ export class AddMovieToUserList implements IUseCase<Movie, Movie[]> {
     }
     const alreadyExists = currentList.some((item: Movie) => item.id === movie.id);
     if (alreadyExists) {
-      return new AppError("Filme já está na sua lista!");
+      return new AppError(MessageCode.MOVIE_ALREADY_IN_LIST);
     }
     const response = await this.addMovieToUserListRepository.execute(movie);
     if (response instanceof AppError) {
       return response;
     }
-    return { data: response, message: "Filme adicionado à sua lista com sucesso!" };
+    return { data: response, messageCode: MessageCode.MOVIE_ADDED_TO_LIST };
   }
 }

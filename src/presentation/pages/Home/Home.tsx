@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Search } from "presentation/components/molecules/Search/Search";
 import { Card } from "presentation/components/organisms/Card/Card";
 import { NotFound } from "presentation/components/molecules/NotFound/NotFound";
 import { useMovies } from "hooks/movie/useMovies";
 import { useUserList } from "hooks/userList/useUserList";
+import { useConfig } from "hooks/useConfig";
 import {
   HomeContainer,
   HomeTitleSection,
@@ -18,18 +20,21 @@ import {
 } from "./styles";
 
 export const Home = () => {
+  const { t } = useTranslation();
+  const config = useConfig();
+
   const categories = [
-    { name: "now_playing", text: "Agora no cinema" },
-    { name: "popular", text: "Populares" },
-    { name: "top_rated", text: "Melhores avaliados" },
-    { name: "upcoming", text: "Que estão por vir" },
+    { name: "now_playing", text: t("home.categories.now_playing") },
+    { name: "popular", text: t("home.categories.popular") },
+    { name: "top_rated", text: t("home.categories.top_rated") },
+    { name: "upcoming", text: t("home.categories.upcoming") },
   ];
 
   const [currentCategory, setCurrentCategory] = useState(categories[1].name);
   const [search, setSearch] = useState("");
   const { movies, loading, changeCategory } = useMovies(currentCategory);
   const { userList } = useUserList();
-  const baseImgUrl = "https://image.tmdb.org/t/p/w500";
+  const baseImgUrl = config.getBaseImgUrl();
 
   const handleSelect = (name: string) => {
     setCurrentCategory(name);
@@ -43,18 +48,18 @@ export const Home = () => {
   return loading ? (
     <HomeContainer>
       <HomeTitleSection>
-        <h2>Carregando...</h2>
+        <h2>{t("common.loading")}</h2>
       </HomeTitleSection>
     </HomeContainer>
   ) : (
     <div>
       <HomeContainer>
         <HomeTitleSection>
-          <h2>Catálogo de Filmes</h2>
+          <h2>{t("home.title")}</h2>
           <Search onSearch={setSearch} />
         </HomeTitleSection>
         <CategorySection>
-          <h3>Quais filmes quer ver?</h3>
+          <h3>{t("home.subtitle")}</h3>
           <CategoryList>
             {categories.map((item) => (
               <CategoryItem key={item.name} onClick={() => handleSelect(item.name)}>
@@ -67,9 +72,9 @@ export const Home = () => {
           <MiniUserList key={userList[0].title}>
             <MiniUserListImage src={`${baseImgUrl}${userList[0].posterPath}`} alt={userList[0].title} />
             <div>
-              <h4>Sua Lista</h4>
+              <h4>{t("home.myList.title")}</h4>
               <MiniUserListLink to="/details/userList">
-                Detalhes
+                {t("home.myList.details")}
               </MiniUserListLink>
             </div>
           </MiniUserList>
