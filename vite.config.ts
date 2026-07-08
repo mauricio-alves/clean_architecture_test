@@ -22,12 +22,11 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-      domain: path.resolve(__dirname, "./src/domain"),
-      data: path.resolve(__dirname, "./src/data"),
-      libs: path.resolve(__dirname, "./src/libs"),
+      business: path.resolve(__dirname, "./src/business"),
       infrastructure: path.resolve(__dirname, "./src/infrastructure"),
-      context: path.resolve(__dirname, "./src/presentation/context"),
-      hooks: path.resolve(__dirname, "./src/presentation/hooks"),
+      libs: path.resolve(__dirname, "./src/libs"),
+      context: path.resolve(__dirname, "./src/context"),
+      hooks: path.resolve(__dirname, "./src/hooks"),
       presentation: path.resolve(__dirname, "./src/presentation"),
       assets: path.resolve(__dirname, "./src/assets"),
       utils: path.resolve(__dirname, "./src/utils"),

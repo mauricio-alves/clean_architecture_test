@@ -19,10 +19,9 @@
     "emitDecoratorMetadata": true,
     "paths": {
       "@/*": ["./src/*"],
-      "hooks/*": ["./src/presentation/hooks/*"],
-      "context/*": ["./src/presentation/context/*"],
-      "data/*": ["./src/data/*"],
-      "domain/*": ["./src/domain/*"],
+      "hooks/*": ["./src/hooks/*"],
+      "context/*": ["./src/context/*"],
+      "business/*": ["./src/business/*"],
       "infrastructure/*": ["./src/infrastructure/*"],
       "libs/*": ["./src/libs/*"],
       "presentation/*": ["./src/presentation/*"],

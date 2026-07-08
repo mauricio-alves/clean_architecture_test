@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import { IConfigService } from "data/protocols/ConfigService";
+import { IConfigService } from "infrastructure/protocols/ConfigService";
 
 @injectable()
 export class EnvConfigService implements IConfigService {

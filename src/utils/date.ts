@@ -1,4 +1,4 @@
-import { MessageCode } from "domain/common/MessageCodes";
+import { MessageCode } from "business/domain/common/MessageCodes";
 
 export const formatDate = (dateString: string, language: string): { value: string; error?: MessageCode } => {
   const date = new Date(dateString);

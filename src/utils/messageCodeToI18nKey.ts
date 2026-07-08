@@ -1,4 +1,4 @@
-import { MessageCode } from "domain/common/MessageCodes";
+import { MessageCode } from "business/domain/common/MessageCodes";
 
 export const messageCodeToI18nKey = {
   [MessageCode.MOVIE_ALREADY_IN_LIST]: "messages.MOVIE_ALREADY_IN_LIST",

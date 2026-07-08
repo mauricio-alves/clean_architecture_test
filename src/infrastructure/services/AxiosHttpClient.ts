@@ -1,6 +1,6 @@
 import { injectable } from "inversify";
 import axios, { AxiosInstance } from "axios";
-import { HttpGetParams, HttpResponse, IHttpClient } from "data/protocols/HttpClient";
+import { HttpGetParams, HttpResponse, IHttpClient } from "infrastructure/protocols/HttpClient";
 import { requestInterceptor } from "infrastructure/interceptors/request";
 import { responseInterceptor } from "infrastructure/interceptors/response";
 

@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import { IStorageService } from "data/protocols/StorageService";
+import { IStorageService } from "infrastructure/protocols/StorageService";
 
 @injectable()
 export class LocalStorageService implements IStorageService {

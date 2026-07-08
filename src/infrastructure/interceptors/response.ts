@@ -1,6 +1,6 @@
 import { AxiosInstance } from "axios";
-import AppError from "domain/errors/AppError";
-import { MessageCode } from "domain/common/MessageCodes";
+import AppError from "business/domain/errors/AppError";
+import { MessageCode } from "business/domain/common/MessageCodes";
 
 export const responseInterceptor = (instance: AxiosInstance): void => {
   instance.interceptors.response.use(

@@ -1,5 +1,5 @@
-import { createRouter } from "@tanstack/react-router";
-import { NotFound } from "@/presentation/components/molecules/NotFound/NotFound";
+﻿import { createRouter } from "@tanstack/react-router";
+import { NotFound } from "@/presentation/components/molecules/NotFound";
 import { routeTree } from "@/routeTree.gen";
 
 declare module "@tanstack/react-router" {
@@ -15,3 +15,4 @@ const router = createRouter({
 });
 
 export { router };
+
