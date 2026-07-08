@@ -1,9 +1,9 @@
 ﻿import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { container } from "libs/inversifyjs/container";
-import { MovieTokens } from "libs/inversifyjs/tokens/movieTokens"; import { UserListTokens } from "libs/inversifyjs/tokens/userListTokens"; import { InfraTokens } from "libs/inversifyjs/tokens/infrastructureTokens";
+import { MovieTokens } from "libs/inversifyjs/tokens/movieTokens";
 import { GetMoviesByCategory } from "business/services/movie/GetMoviesByCategory";
-import AppError from "business/domain/errors/AppError";
+import AppError from "@/business/tools/AppError";
 
 export const useMovies = (defaultCategory: string) => {
   const [category, setCategory] = useState(defaultCategory);
@@ -27,4 +27,3 @@ export const useMovies = (defaultCategory: string) => {
     changeCategory: (newCategory: string) => setCategory(newCategory),
   };
 };
-

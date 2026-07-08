@@ -1,4 +1,4 @@
-import { Movie } from "business/domain/models/Movie";
+import { Movie } from "@/business/domain/models/movie/Movie";
 import { Button } from "presentation/components/atoms/Button";
 import { CardContainer, CardImage, CardTitle, CardInfo, ButtonGroup, DetailButton } from "./styles";
 import { useCard } from "./hook";

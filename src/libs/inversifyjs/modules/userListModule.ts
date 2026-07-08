@@ -1,9 +1,9 @@
 ﻿import { ContainerModule } from "inversify";
 import { UserListTokens } from "libs/inversifyjs/tokens/userListTokens";
 
-import type { IGetUserListRepository } from "business/domain/repositories/userList/GetUserListRepository";
-import type { IAddMovieToUserListRepository } from "business/domain/repositories/userList/AddMovieToUserListRepository";
-import type { IRemoveMovieFromUserListRepository } from "business/domain/repositories/userList/RemoveMovieFromUserListRepository";
+import type { IGetUserListRepository } from "@/business/domain/repositories/userList/get";
+import type { IAddMovieToUserListRepository } from "@/business/domain/repositories/userList/create";
+import type { IRemoveMovieFromUserListRepository } from "@/business/domain/repositories/userList/delete";
 
 import { GetUserListRepositoryImpl } from "infrastructure/repositories/userList/GetUserListRepositoryImpl";
 import { AddMovieToUserListRepositoryImpl } from "infrastructure/repositories/userList/AddMovieToUserListRepositoryImpl";

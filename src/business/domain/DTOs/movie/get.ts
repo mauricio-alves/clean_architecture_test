@@ -1,4 +1,4 @@
-export interface MovieDTO {
+export interface GetMovieDTO {
   id: number;
   title: string;
   poster_path: string;

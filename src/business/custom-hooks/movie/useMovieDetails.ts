@@ -1,8 +1,8 @@
 ﻿import { useQuery } from "@tanstack/react-query";
 import { container } from "libs/inversifyjs/container";
-import { MovieTokens } from "libs/inversifyjs/tokens/movieTokens"; import { UserListTokens } from "libs/inversifyjs/tokens/userListTokens"; import { InfraTokens } from "libs/inversifyjs/tokens/infrastructureTokens";
+import { MovieTokens } from "libs/inversifyjs/tokens/movieTokens";
 import { GetMovieDetails } from "business/services/movie/GetMovieDetails";
-import AppError from "business/domain/errors/AppError";
+import AppError from "@/business/tools/AppError";
 
 export const useMovieDetails = (id: string | undefined) => {
   const getMovieDetails = container.get<GetMovieDetails>(MovieTokens.IGetMovieDetails);
@@ -25,4 +25,3 @@ export const useMovieDetails = (id: string | undefined) => {
     error,
   };
 };
-

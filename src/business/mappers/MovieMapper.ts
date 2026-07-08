@@ -1,26 +1,26 @@
-import { Movie } from "business/domain/models/Movie";
-import { MovieDTO } from "business/domain/models/MovieDTO";
+import { Movie } from "@/business/domain/models/movie/Movie";
+import { GetMovieDTO } from "@/business/domain/DTOs/movie/get";
 
 export class MovieMapper {
-  static toEntity(dto: MovieDTO): Movie {
-    return new Movie(
-      dto.id,
-      dto.title,
-      dto.poster_path,
-      dto.release_date,
-      dto.vote_average,
-      dto.backdrop_path,
-      dto.tagline,
-      dto.genres,
-      dto.overview
-    );
+  static toEntity(dto: GetMovieDTO): Movie {
+    return {
+      id: dto.id,
+      title: dto.title,
+      posterPath: dto.poster_path,
+      releaseDate: dto.release_date,
+      voteAverage: dto.vote_average,
+      backdropPath: dto.backdrop_path,
+      tagline: dto.tagline,
+      genres: dto.genres,
+      overview: dto.overview,
+    };
   }
 
-  static toEntityList(dtos: MovieDTO[]): Movie[] {
+  static toEntityList(dtos: GetMovieDTO[]): Movie[] {
     return dtos.map(MovieMapper.toEntity);
   }
 
-  static toDTO(entity: Movie): MovieDTO {
+  static toDTO(entity: Movie): GetMovieDTO {
     return {
       id: entity.id,
       title: entity.title,
@@ -30,11 +30,11 @@ export class MovieMapper {
       backdrop_path: entity.backdropPath,
       tagline: entity.tagline,
       genres: entity.genres,
-      overview: entity.overview
+      overview: entity.overview,
     };
   }
 
-  static toDTOList(entities: Movie[]): MovieDTO[] {
+  static toDTOList(entities: Movie[]): GetMovieDTO[] {
     return entities.map(MovieMapper.toDTO);
   }
 }

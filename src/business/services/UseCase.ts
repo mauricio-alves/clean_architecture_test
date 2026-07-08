@@ -1,5 +1,5 @@
-import { IAPIResponse } from "./APIResponse";
-import AppError from "business/domain/errors/AppError";
+import { IAPIResponse } from "../domain/common/api-response";
+import AppError from "@/business/tools/AppError";
 
 export interface IUseCase<Input, Output> {
   execute(input: Input): Promise<IAPIResponse<Output> | AppError>;

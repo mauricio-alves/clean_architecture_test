@@ -1,5 +1,5 @@
-import { useTranslation } from "react-i18next";
-import { Movie } from "business/domain/models/Movie";
+﻿import { useTranslation } from "react-i18next";
+import { Movie } from "@/business/domain/models/movie/Movie";
 import { useUserList } from "business/custom-hooks/userList/useUserList";
 import { useConfig } from "hooks/useConfig";
 import { formatDate } from "utils/date";
@@ -16,12 +16,14 @@ export const useCard = (movie: Movie) => {
   };
 
   const dateResult = formatDate(movie.releaseDate, i18n.language);
-  const formattedDate = dateResult.error ? t(messageCodeToI18nKey[dateResult.error]) : dateResult.value;
+  const formattedDate = dateResult.error ? String(t(messageCodeToI18nKey[dateResult.error] as any)) : dateResult.value;
 
   return {
     baseImgUrl,
     t,
     handleAddMovie,
-    formattedDate
+    formattedDate,
   };
 };
+
+

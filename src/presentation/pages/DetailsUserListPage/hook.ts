@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next";
+﻿import { useTranslation } from "react-i18next";
 import { useUserList } from "business/custom-hooks/userList/useUserList";
 import { useConfig } from "hooks/useConfig";
 import { formatDate } from "utils/date";
@@ -16,7 +16,7 @@ export const useDetailsUserList = () => {
 
   const getFormattedDate = (releaseDate: string) => {
     const dateResult = formatDate(releaseDate, i18n.language);
-    return dateResult.error ? t(messageCodeToI18nKey[dateResult.error]) : dateResult.value;
+    return dateResult.error ? String(t(messageCodeToI18nKey[dateResult.error] as any)) : dateResult.value;
   };
 
   return {
@@ -27,3 +27,5 @@ export const useDetailsUserList = () => {
     getFormattedDate
   };
 };
+
+

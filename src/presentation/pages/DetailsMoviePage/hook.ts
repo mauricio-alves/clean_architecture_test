@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "@tanstack/react-router";
+﻿import { useNavigate, useParams } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { useMovieDetails } from "business/custom-hooks/movie/useMovieDetails";
 import { useConfig } from "hooks/useConfig";
@@ -23,7 +23,7 @@ export const useDetailsMovie = () => {
   let formattedDate = "";
   if (movie) {
     const dateResult = formatDate(movie.releaseDate, i18n.language);
-    formattedDate = dateResult.error ? t(messageCodeToI18nKey[dateResult.error]) : dateResult.value;
+    formattedDate = dateResult.error ? String(t(messageCodeToI18nKey[dateResult.error] as any)) : dateResult.value;
   }
 
   return {
@@ -36,3 +36,5 @@ export const useDetailsMovie = () => {
     formattedDate
   };
 };
+
+

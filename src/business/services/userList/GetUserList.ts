@@ -1,24 +1,19 @@
 ﻿import { injectable, inject } from "inversify";
-import { Movie } from "business/domain/models/Movie";
-import type { IGetUserListRepository } from "business/domain/repositories/userList/GetUserListRepository";
-import { MovieTokens } from "libs/inversifyjs/tokens/movieTokens"; import { UserListTokens } from "libs/inversifyjs/tokens/userListTokens"; import { InfraTokens } from "libs/inversifyjs/tokens/infrastructureTokens";
+import { Movie } from "@/business/domain/models/movie/Movie";
+import type { IGetUserListRepository } from "@/business/domain/repositories/userList/get";
+import { UserListTokens } from "libs/inversifyjs/tokens/userListTokens";
 import { IUseCase } from "business/services/UseCase";
-import { IAPIResponse } from "business/services/APIResponse";
-import AppError from "business/domain/errors/AppError";
+import { IAPIResponse } from "@/business/domain/common/api-response";
+import AppError from "@/business/tools/AppError";
 
 @injectable()
 export class GetUserList implements IUseCase<void, Movie[]> {
   constructor(
     @inject(UserListTokens.IGetUserListRepository)
-    private readonly getUserListRepository: IGetUserListRepository,
+    private readonly userListRepository: IGetUserListRepository,
   ) {}
 
-  async execute(_input: void): Promise<IAPIResponse<Movie[]> | AppError> {
-    const response = await this.getUserListRepository.execute();
-    if (response instanceof AppError) {
-      return response;
-    }
-    return { data: response };
+  async execute(): Promise<IAPIResponse<Movie[]> | AppError> {
+    return this.userListRepository.execute();
   }
 }
-

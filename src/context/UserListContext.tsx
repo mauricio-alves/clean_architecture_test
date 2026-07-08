@@ -1,14 +1,14 @@
 ﻿import { createContext, useContext, useState, useEffect, ReactNode, useMemo, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { Movie } from "business/domain/models/Movie";
+import { Movie } from "@/business/domain/models/movie/Movie";
 import { container } from "libs/inversifyjs/container";
-import { MovieTokens } from "libs/inversifyjs/tokens/movieTokens"; import { UserListTokens } from "libs/inversifyjs/tokens/userListTokens"; import { InfraTokens } from "libs/inversifyjs/tokens/infrastructureTokens";
+import { UserListTokens } from "libs/inversifyjs/tokens/userListTokens";
 import { GetUserList } from "business/services/userList/GetUserList";
 import { AddMovieToUserList } from "business/services/userList/AddMovieToUserList";
 import { RemoveMovieFromUserList } from "business/services/userList/RemoveMovieFromUserList";
 import { toast } from "react-hot-toast";
-import AppError from "business/domain/errors/AppError";
-import { MessageCode } from "business/domain/common/MessageCodes";
+import AppError from "@/business/tools/AppError";
+import { CodeMessagesEnum } from "@/business/domain/common/enums/code-messages";
 import { messageCodeToI18nKey } from "utils/messageCodeToI18nKey";
 
 interface UserListContextData {
@@ -32,7 +32,7 @@ export const UserListProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     async function loadFavorites() {
       try {
-        const response = await getUserListUseCase.execute(undefined);
+        const response = await getUserListUseCase.execute();
         if (response instanceof AppError) {
           console.error(response.message);
         } else {
@@ -52,18 +52,16 @@ export const UserListProvider = ({ children }: { children: ReactNode }) => {
       try {
         const response = await addMovieToUserListUseCase.execute(movie);
         if (response instanceof AppError) {
-          toast.error(t(messageCodeToI18nKey[response.messageCode]));
+          toast.error(String(t(messageCodeToI18nKey[response.code] as any)));
         } else {
           setUserList(response.data);
-          if (response.messageCode) {
-            toast.success(t(messageCodeToI18nKey[response.messageCode]));
-          }
+          toast.success(String(t(messageCodeToI18nKey[CodeMessagesEnum.MOVIE_ADDED_TO_LIST] as any)));
         }
       } catch (error: any) {
         if (error instanceof AppError) {
-          toast.error(t(messageCodeToI18nKey[error.messageCode]));
+          toast.error(String(t(messageCodeToI18nKey[error.code] as any)));
         } else {
-          toast.error(t(messageCodeToI18nKey[MessageCode.ERROR_ADD_MOVIE]));
+          toast.error(String(t(messageCodeToI18nKey[CodeMessagesEnum.ERROR_ADD_MOVIE] as any)));
         }
       }
     },
@@ -73,20 +71,18 @@ export const UserListProvider = ({ children }: { children: ReactNode }) => {
   const removeMovie = useCallback(
     async (movieId: number) => {
       try {
-        const response = await removeMovieFromUserListUseCase.execute(movieId);
+        const response = await removeMovieFromUserListUseCase.execute(movieId.toString());
         if (response instanceof AppError) {
-          toast.error(t(messageCodeToI18nKey[response.messageCode]));
+          toast.error(String(t(messageCodeToI18nKey[response.code] as any)));
         } else {
           setUserList(response.data);
-          if (response.messageCode) {
-            toast.success(t(messageCodeToI18nKey[response.messageCode]));
-          }
+          toast.success(String(t(messageCodeToI18nKey[CodeMessagesEnum.MOVIE_REMOVED_FROM_LIST] as any)));
         }
       } catch (error: any) {
         if (error instanceof AppError) {
-          toast.error(t(messageCodeToI18nKey[error.messageCode]));
+          toast.error(String(t(messageCodeToI18nKey[error.code] as any)));
         } else {
-          toast.error(t(messageCodeToI18nKey[MessageCode.ERROR_REMOVE_MOVIE]));
+          toast.error(String(t(messageCodeToI18nKey[CodeMessagesEnum.ERROR_REMOVE_MOVIE] as any)));
         }
       }
     },
@@ -107,4 +103,5 @@ export const UserListProvider = ({ children }: { children: ReactNode }) => {
 };
 
 export const useUserListContext = () => useContext(UserListContext);
+
 

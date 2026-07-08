@@ -1,8 +1,8 @@
 ﻿import { injectable, inject } from "inversify";
 import type { IHttpClient } from "infrastructure/protocols/HttpClient";
 import type { IConfigService } from "infrastructure/protocols/ConfigService";
-import { MovieDTO } from "business/domain/models/MovieDTO";
-import { MovieTokens } from "libs/inversifyjs/tokens/movieTokens"; import { UserListTokens } from "libs/inversifyjs/tokens/userListTokens"; import { InfraTokens } from "libs/inversifyjs/tokens/infrastructureTokens";
+import { GetMovieDTO } from "@/business/domain/DTOs/movie/get";
+import { InfraTokens } from "libs/inversifyjs/tokens/infrastructureTokens";
 
 @injectable()
 export class MovieRemoteDataSource {
@@ -13,11 +13,11 @@ export class MovieRemoteDataSource {
     private readonly configService: IConfigService,
   ) {}
 
-  async getMoviesByCategory(category: string): Promise<MovieDTO[]> {
+  async getMoviesByCategory(category: string): Promise<GetMovieDTO[]> {
     const apiKey = this.configService.getApiKey();
     const baseUrl = this.configService.getBaseUrl();
     const language = this.configService.getLanguage();
-    const response = await this.httpClient.get<{ results: MovieDTO[] }>({
+    const response = await this.httpClient.get<{ results: GetMovieDTO[] }>({
       url: `${baseUrl}/movie/${category}`,
       params: {
         api_key: apiKey,
@@ -28,11 +28,11 @@ export class MovieRemoteDataSource {
     return response.body.results;
   }
 
-  async getMovieDetails(id: string): Promise<MovieDTO> {
+  async getMovieDetails(id: string): Promise<GetMovieDTO> {
     const apiKey = this.configService.getApiKey();
     const baseUrl = this.configService.getBaseUrl();
     const language = this.configService.getLanguage();
-    const response = await this.httpClient.get<MovieDTO>({
+    const response = await this.httpClient.get<GetMovieDTO>({
       url: `${baseUrl}/movie/${id}`,
       params: {
         api_key: apiKey,
@@ -42,4 +42,3 @@ export class MovieRemoteDataSource {
     return response.body;
   }
 }
-

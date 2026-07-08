@@ -1,6 +1,6 @@
-import { AxiosInstance } from "axios";
-import AppError from "business/domain/errors/AppError";
-import { MessageCode } from "business/domain/common/MessageCodes";
+﻿import { AxiosInstance } from "axios";
+import AppError from "@/business/tools/AppError";
+import { CodeMessagesEnum } from "@/business/domain/common/enums/code-messages";
 
 export const responseInterceptor = (instance: AxiosInstance): void => {
   instance.interceptors.response.use(
@@ -12,21 +12,22 @@ export const responseInterceptor = (instance: AxiosInstance): void => {
         const { status } = error.response;
         console.error(`[HTTP Response Error] ${status} ${error.config.url}`, error.response.data);
         if (status === 401) {
-          return Promise.reject(new AppError(MessageCode.ERROR_UNAUTHORIZED));
+          return Promise.reject(new AppError(CodeMessagesEnum.ERROR_UNAUTHORIZED));
         }
         if (status === 404) {
-          return Promise.reject(new AppError(MessageCode.ERROR_NOT_FOUND));
+          return Promise.reject(new AppError(CodeMessagesEnum.ERROR_NOT_FOUND));
         }
         if (status >= 500) {
-          return Promise.reject(new AppError(MessageCode.ERROR_SERVER));
+          return Promise.reject(new AppError(CodeMessagesEnum.ERROR_SERVER));
         }
       } else if (error.request) {
         console.error("[HTTP Network Error] Sem resposta do servidor", error.request);
-        return Promise.reject(new AppError(MessageCode.ERROR_NETWORK));
+        return Promise.reject(new AppError(CodeMessagesEnum.ERROR_NETWORK));
       } else {
         console.error("[HTTP Error]", error.message);
       }
       return Promise.reject(error);
-    }
+    },
   );
 };
+
