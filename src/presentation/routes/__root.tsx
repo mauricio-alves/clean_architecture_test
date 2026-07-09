@@ -1,17 +1,16 @@
 import { createRootRoute, Outlet } from "@tanstack/react-router";
-import { Toaster } from "react-hot-toast";
 import { Header } from "@/presentation/components/organisms/Header";
 import { Footer } from "@/presentation/components/organisms/Footer";
-import { UserListProvider } from "@/context/UserListContext";
+
+import { AppToaster } from "../components/atoms/Toast";
 
 export const Route = createRootRoute({
   component: () => (
-    <UserListProvider>
+    <>
       <Header />
-      <Toaster />
+      <AppToaster />
       <Outlet />
       <Footer />
-    </UserListProvider>
+    </>
   ),
 });
-
