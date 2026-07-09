@@ -1,17 +1,21 @@
-﻿import { injectable, inject } from "inversify";
-import { Movie } from "@/business/domain/models/movie/Movie";
+import { injectable, inject } from "inversify";
+import { Movie } from "@/business/domain/models/movie/movie";
 import type { IGetMovieDetailsRepository } from "@/business/domain/repositories/movie/get-details";
-import { MovieRemoteDataSource } from "infrastructure/dataSources/remote/MovieRemoteDataSource";
-import { MovieMapper } from "@/business/mappers/MovieMapper";
-import { MovieTokens } from "libs/inversifyjs/tokens/movieTokens";
+import type { IHttpClient } from "@/business/domain/common/http-client";
+import type { IConfigService } from "@/business/domain/common/config-service";
+import type { GetMovieDTO } from "@/business/domain/dtos/movie/get";
+import { InfraTokens } from "libs/inversifyjs/tokens/infrastructure-tokens";
+import { MovieMapper } from "@/business/mappers/movie-mapper";
 import { CodeMessagesEnum } from "@/business/domain/common/enums/code-messages";
 import { BaseGetRepository } from "@/infrastructure/repositories/base/get";
 
 @injectable()
 export class GetMovieDetailsRepository extends BaseGetRepository<Movie> implements IGetMovieDetailsRepository {
   constructor(
-    @inject(MovieTokens.IMovieRemoteDataSource)
-    private readonly remoteDataSource: MovieRemoteDataSource,
+    @inject(InfraTokens.IHttpClient)
+    private readonly httpClient: IHttpClient,
+    @inject(InfraTokens.IConfigService)
+    private readonly configService: IConfigService,
   ) {
     super();
   }
@@ -21,7 +25,18 @@ export class GetMovieDetailsRepository extends BaseGetRepository<Movie> implemen
   }
 
   protected async fetchData(id: string): Promise<Movie> {
-    const dto = await this.remoteDataSource.getMovieDetails(id);
-    return MovieMapper.toEntity(dto);
+    const apiKey = this.configService.getApiKey();
+    const baseUrl = this.configService.getBaseUrl();
+    const language = this.configService.getLanguage();
+    
+    const response = await this.httpClient.get<GetMovieDTO>({
+      url: `${baseUrl}/movie/${id}`,
+      params: {
+        api_key: apiKey,
+        language,
+      },
+    });
+    
+    return MovieMapper.toEntity(response.body);
   }
 }

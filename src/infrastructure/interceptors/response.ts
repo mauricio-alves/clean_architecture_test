@@ -1,5 +1,5 @@
-﻿import { AxiosInstance } from "axios";
-import AppError from "@/business/tools/AppError";
+import { AxiosInstance } from "axios";
+import AppError from "@/business/tools/app-error";
 import { CodeMessagesEnum } from "@/business/domain/common/enums/code-messages";
 
 export const responseInterceptor = (instance: AxiosInstance): void => {

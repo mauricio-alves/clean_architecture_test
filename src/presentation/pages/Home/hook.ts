@@ -1,8 +1,8 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useMovies } from "business/custom-hooks/movie/useMovies";
-import { useUserList } from "business/custom-hooks/userList/useUserList";
-import { useConfig } from "hooks/useConfig";
+import { useMovies } from "@/business/query-hooks/movie/queries/use-movies";
+import { useUserList } from "@/business/query-hooks/user-list/queries/use-user-list";
+import { useConfig } from "hooks/use-config";
 
 export const useHome = () => {
   const { t } = useTranslation();
@@ -28,9 +28,7 @@ export const useHome = () => {
 
   const removeAccents = (str: string) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-  const filteredMovies = movies.filter((movie) =>
-    removeAccents(movie.title.toLowerCase()).includes(removeAccents(search.toLowerCase()))
-  );
+  const filteredMovies = movies.filter((movie) => removeAccents(movie.title.toLowerCase()).includes(removeAccents(search.toLowerCase())));
 
   return {
     t,
@@ -41,6 +39,6 @@ export const useHome = () => {
     userList,
     baseImgUrl,
     handleSelect,
-    filteredMovies
+    filteredMovies,
   };
 };

@@ -22,7 +22,7 @@ export const DetailsUserListPage = () => {
     t,
     userList,
     baseImgUrl,
-    handleRemoveMovie,
+    handledeleteMovie,
     getFormattedDate
   } = useDetailsUserList();
 
@@ -58,7 +58,7 @@ export const DetailsUserListPage = () => {
                     <DetailButton to="/details/$id" params={{ id: movie.id.toString() }}>
                       {t("card.detailsButton")}
                     </DetailButton>
-                    <Button variant="delete" onClick={() => handleRemoveMovie(movie.id)}>
+                    <Button variant="delete" onClick={() => handledeleteMovie(movie.id)}>
                       {t("card.removeButton")}
                     </Button>
                   </ButtonGroup>

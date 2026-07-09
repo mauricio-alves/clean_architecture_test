@@ -1,9 +1,9 @@
-﻿import { useNavigate, useParams } from "@tanstack/react-router";
+import { useNavigate, useParams } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { useMovieDetails } from "business/custom-hooks/movie/useMovieDetails";
-import { useConfig } from "hooks/useConfig";
+import { useMovieDetails } from "@/business/query-hooks/movie/queries/use-movie-details";
+import { useConfig } from "hooks/use-config";
 import { formatDate } from "utils/date";
-import { messageCodeToI18nKey } from "utils/messageCodeToI18nKey";
+import { messageCodeToI18nKey } from "utils/message-code-to-i18n-key";
 
 export const useDetailsMovie = () => {
   const navigate = useNavigate();
@@ -33,8 +33,6 @@ export const useDetailsMovie = () => {
     error,
     imgUrl,
     baseImgUrl,
-    formattedDate
+    formattedDate,
   };
 };
-
-

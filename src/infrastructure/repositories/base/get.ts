@@ -1,6 +1,6 @@
-﻿import { injectable } from "inversify";
+import { injectable } from "inversify";
 import type { IAPIResponse } from "@/business/domain/common/api-response";
-import AppError from "@/business/tools/AppError";
+import AppError from "@/business/tools/app-error";
 import { CodeMessagesEnum } from "@/business/domain/common/enums/code-messages";
 import { handleResponseRepository } from "@/infrastructure/utils/handle-response-repository";
 import type { IGetBaseRepository } from "@/business/domain/repositories/base/get";

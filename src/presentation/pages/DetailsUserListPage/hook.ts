@@ -1,17 +1,34 @@
-﻿import { useTranslation } from "react-i18next";
-import { useUserList } from "business/custom-hooks/userList/useUserList";
-import { useConfig } from "hooks/useConfig";
+import { useTranslation } from "react-i18next";
+import { useUserList } from "@/business/query-hooks/user-list/queries/use-user-list";
+import { useDeleteMovieFromList } from "business/query-hooks/user-list/mutations/use-delete-movie-from-list";
+import { useConfig } from "hooks/use-config";
 import { formatDate } from "utils/date";
-import { messageCodeToI18nKey } from "utils/messageCodeToI18nKey";
+import { messageCodeToI18nKey } from "utils/message-code-to-i18n-key";
+import { toast } from "@/presentation/components/atoms/Toast/hook";
+import { CodeMessagesEnum } from "@/business/domain/common/enums/code-messages";
+import AppError from "@/business/tools/app-error";
 
 export const useDetailsUserList = () => {
   const config = useConfig();
   const baseImgUrl = config.getBaseImgUrl();
-  const { userList, removeMovie } = useUserList();
+  const { userList } = useUserList();
   const { t, i18n } = useTranslation();
 
-  const handleRemoveMovie = async (id: number) => {
-    await removeMovie(id);
+  const { deleteMovie } = useDeleteMovieFromList({
+    onSuccess: () => {
+      toast({
+        title: String(t(messageCodeToI18nKey[CodeMessagesEnum.MOVIE_REMOVED_FROM_LIST] as any)),
+        variant: "success",
+      });
+    },
+    onError: (error: AppError) => {
+      const code = error.code || CodeMessagesEnum.ERROR_REMOVE_MOVIE;
+      toast({ title: String(t(messageCodeToI18nKey[code] as any)), variant: "destructive" });
+    }
+  });
+
+  const handledeleteMovie = (id: number) => {
+    deleteMovie(id);
   };
 
   const getFormattedDate = (releaseDate: string) => {
@@ -23,9 +40,7 @@ export const useDetailsUserList = () => {
     t,
     userList,
     baseImgUrl,
-    handleRemoveMovie,
-    getFormattedDate
+    handledeleteMovie,
+    getFormattedDate,
   };
 };
-
-

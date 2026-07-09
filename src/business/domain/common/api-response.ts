@@ -1,4 +1,4 @@
-import { ErrorMessage } from "../DTOs/error-message";
+import { ErrorMessage } from "../dtos/error-message";
 
 export interface IAPIResponse<T> {
   success: boolean;

@@ -1,7 +1,7 @@
 import { Container } from "inversify";
-import { infrastructureModule } from "./modules/infrastructureModule";
-import { movieModule } from "./modules/movieModule";
-import { userListModule } from "./modules/userListModule";
+import { infrastructureModule } from "./modules/infrastructure-module";
+import { movieModule } from "./modules/movie-module";
+import { userListModule } from "./modules/user-list-module";
 
 export const container = new Container({ defaultScope: "Singleton" });
 

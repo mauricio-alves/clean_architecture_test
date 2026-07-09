@@ -1,5 +1,5 @@
-﻿import type { IAPIResponse } from "@/business/domain/common/api-response";
-import AppError from '@/business/tools/AppError';
+import type { IAPIResponse } from "@/business/domain/common/api-response";
+import AppError from '@/business/tools/app-error';
 import { CodeMessagesEnum } from '@/business/domain/common/enums/code-messages';
 
 export async function handleResponseRepository<T>(

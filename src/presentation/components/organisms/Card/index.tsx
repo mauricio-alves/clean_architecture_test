@@ -1,4 +1,4 @@
-import { Movie } from "@/business/domain/models/movie/Movie";
+import { Movie } from "@/business/domain/models/movie/movie";
 import { Button } from "presentation/components/atoms/Button";
 import { CardContainer, CardImage, CardTitle, CardInfo, ButtonGroup, DetailButton } from "./styles";
 import { useCard } from "./hook";
@@ -8,7 +8,7 @@ export interface CardProps {
 }
 
 export const Card = ({ movie }: CardProps) => {
-  const { baseImgUrl, t, handleAddMovie, formattedDate } = useCard(movie);
+  const { baseImgUrl, t, handlecreateMovie, formattedDate } = useCard(movie);
 
   return (
     <CardContainer>
@@ -26,7 +26,7 @@ export const Card = ({ movie }: CardProps) => {
         <DetailButton to="/details/$id" params={{ id: movie.id.toString() }}>
           {t("card.detailsButton")}
         </DetailButton>
-        <Button variant="add" onClick={handleAddMovie}>
+        <Button variant="add" onClick={handlecreateMovie}>
           {t("card.addButton")}
         </Button>
       </ButtonGroup>
