@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import { IConfigService } from "business/domain/common/config-service";
+import { IConfigService } from "@/business/domain/common/config-service";
 
 @injectable()
 export class EnvConfigService implements IConfigService {
@@ -8,6 +8,7 @@ export class EnvConfigService implements IConfigService {
   private readonly baseImgUrl: string = "https://image.tmdb.org/t/p/w500";
   private readonly backdropImgUrl: string = "https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces";
   private readonly language: string;
+  private readonly userListStorageKey: string = "@movie-app:favorites";
 
   constructor() {
     const key = import.meta.env.VITE_API_KEY;
@@ -36,5 +37,9 @@ export class EnvConfigService implements IConfigService {
 
   getLanguage(): string {
     return this.language;
+  }
+
+  getUserListStorageKey(): string {
+    return this.userListStorageKey;
   }
 }

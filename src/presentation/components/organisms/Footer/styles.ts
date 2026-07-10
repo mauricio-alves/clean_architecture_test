@@ -1,4 +1,4 @@
-import styled from "libs/styled-components";
+import styled from "@/libs/styled-components";
 
 export const FooterContainer = styled.footer`
   padding: 10px 0;

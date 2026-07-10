@@ -1,9 +1,9 @@
 import { ContainerModule } from "inversify";
-import { InfraTokens } from "libs/inversifyjs/tokens/infrastructure-tokens";
+import { InfraTokens } from "@/libs/inversifyjs/tokens/infrastructure-tokens";
 
-import type { IHttpClient } from "business/domain/common/http-client";
-import type { IStorageService } from "business/domain/common/storage-service";
-import type { IConfigService } from "business/domain/common/config-service";
+import type { IHttpClient } from "@/business/domain/common/http-client";
+import type { IStorageService } from "@/business/domain/common/storage-service";
+import type { IConfigService } from "@/business/domain/common/config-service";
 
 import { AxiosHttpClient } from "@/infrastructure/adapters/axios-http-client";
 import { LocalStorageService } from "@/infrastructure/adapters/local-storage-service";

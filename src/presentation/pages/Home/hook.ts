@@ -2,18 +2,18 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useMovies } from "@/business/query-hooks/movie/queries/use-movies";
 import { useUserList } from "@/business/query-hooks/user-list/queries/use-user-list";
-import { useConfig } from "hooks/use-config";
+import { filterMoviesBySearch } from "@/business/tools/filter-movies-by-search";
+import { MovieCategoryEnum } from "@/business/domain/common/enums/movie-category";
+import { useConfig } from "@/hooks/use-config";
 
 export const useHome = () => {
   const { t } = useTranslation();
   const config = useConfig();
 
-  const categories = [
-    { name: "now_playing", text: t("home.categories.now_playing") },
-    { name: "popular", text: t("home.categories.popular") },
-    { name: "top_rated", text: t("home.categories.top_rated") },
-    { name: "upcoming", text: t("home.categories.upcoming") },
-  ];
+  const categories = Object.values(MovieCategoryEnum).map((category) => ({
+    name: category,
+    text: t(`home.categories.${category}`),
+  }));
 
   const [currentCategory, setCurrentCategory] = useState(categories[1].name);
   const [search, setSearch] = useState("");
@@ -21,14 +21,12 @@ export const useHome = () => {
   const { userList } = useUserList();
   const baseImgUrl = config.getBaseImgUrl();
 
-  const handleSelect = (name: string) => {
+  const handleSelect = (name: MovieCategoryEnum) => {
     setCurrentCategory(name);
     changeCategory(name);
   };
 
-  const removeAccents = (str: string) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-
-  const filteredMovies = movies.filter((movie) => removeAccents(movie.title.toLowerCase()).includes(removeAccents(search.toLowerCase())));
+  const filteredMovies = filterMoviesBySearch(movies, search);
 
   return {
     t,

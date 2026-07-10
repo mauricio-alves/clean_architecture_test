@@ -1,4 +1,4 @@
-import styled from "libs/styled-components";
+import styled from "@/libs/styled-components";
 import { Link } from "@tanstack/react-router";
 
 export const DetailsContainer = styled.div<{ $bgImage: string }>`

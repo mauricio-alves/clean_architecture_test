@@ -1,13 +1,5 @@
-import { NotFound } from "presentation/components/molecules/NotFound";
-import { Button } from "presentation/components/atoms/Button";
-import {
-  CardContainer,
-  CardImage,
-  CardTitle,
-  CardInfo,
-  ButtonGroup,
-  DetailButton
-} from "presentation/components/organisms/Card/styles";
+import { NotFound } from "@/presentation/components/molecules/NotFound";
+import { Card } from "@/presentation/components/organisms/Card";
 import {
   UserListContainer,
   UserListTitle,
@@ -18,56 +10,29 @@ import {
 import { useDetailsUserList } from "./hook";
 
 export const DetailsUserListPage = () => {
-  const {
-    t,
-    userList,
-    baseImgUrl,
-    handledeleteMovie,
-    getFormattedDate
-  } = useDetailsUserList();
+  const { t, userList } = useDetailsUserList();
 
   return (
-    <>
-      <UserListContainer>
-        <div>
-          <UserListTitle>{t("myList.title")}</UserListTitle>
-        </div>
-        <BackButtonWrapper>
-          <ListBackButton to="/">
-            {t("common.backToHome")}
-          </ListBackButton>
-        </BackButtonWrapper>
-        <div style={{ width: "100%" }}>
-          {userList.length === 0 ? (
-            <NotFound />
-          ) : (
-            <ListGrid>
-              {userList.map((movie: any) => (
-                <CardContainer key={movie.id}>
-                  <CardImage src={`${baseImgUrl}${movie.posterPath}`} alt={movie.title} />
-                  <CardTitle>
-                    <strong>{movie.title}</strong>
-                  </CardTitle>
-                  <CardInfo>
-                    {t("common.releaseDate")} {getFormattedDate(movie.releaseDate)}
-                  </CardInfo>
-                  <CardInfo>
-                    {t("common.rating")} <strong>{movie.voteAverage.toFixed(1)}</strong>
-                  </CardInfo>
-                  <ButtonGroup>
-                    <DetailButton to="/details/$id" params={{ id: movie.id.toString() }}>
-                      {t("card.detailsButton")}
-                    </DetailButton>
-                    <Button variant="delete" onClick={() => handledeleteMovie(movie.id)}>
-                      {t("card.removeButton")}
-                    </Button>
-                  </ButtonGroup>
-                </CardContainer>
-              ))}
-            </ListGrid>
-          )}
-        </div>
-      </UserListContainer>
-    </>
+    <UserListContainer>
+      <div>
+        <UserListTitle>{t("myList.title")}</UserListTitle>
+      </div>
+      <BackButtonWrapper>
+        <ListBackButton to="/">
+          {t("common.backToHome")}
+        </ListBackButton>
+      </BackButtonWrapper>
+      <div style={{ width: "100%" }}>
+        {userList.length === 0 ? (
+          <NotFound />
+        ) : (
+          <ListGrid>
+            {userList.map((movie) => (
+              <Card key={movie.id} movie={movie} variant="remove" />
+            ))}
+          </ListGrid>
+        )}
+      </div>
+    </UserListContainer>
   );
 };

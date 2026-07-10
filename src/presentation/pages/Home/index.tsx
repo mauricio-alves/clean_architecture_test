@@ -1,6 +1,6 @@
-import { Search } from "presentation/components/molecules/Search";
-import { Card } from "presentation/components/organisms/Card";
-import { NotFound } from "presentation/components/molecules/NotFound";
+import { Search } from "@/presentation/components/molecules/Search";
+import { Card } from "@/presentation/components/organisms/Card";
+import { NotFound } from "@/presentation/components/molecules/NotFound";
 import {
   HomeContainer,
   HomeTitleSection,

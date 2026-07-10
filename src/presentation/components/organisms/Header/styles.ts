@@ -1,4 +1,4 @@
-import styled from "libs/styled-components";
+import styled from "@/libs/styled-components";
 
 export const HeaderContainer = styled.header`
   display: flex;

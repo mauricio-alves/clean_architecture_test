@@ -1,9 +1,10 @@
+import { useEffect } from "react";
 import { useNavigate, useParams } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { useMovieDetails } from "@/business/query-hooks/movie/queries/use-movie-details";
-import { useConfig } from "hooks/use-config";
-import { formatDate } from "utils/date";
-import { messageCodeToI18nKey } from "utils/message-code-to-i18n-key";
+import { useConfig } from "@/hooks/use-config";
+import { formatDate } from "@/utils/date";
+import { messageCodeToI18nKey } from "@/utils/message-code-to-i18n-key";
 
 export const useDetailsMovie = () => {
   const navigate = useNavigate();
@@ -14,9 +15,11 @@ export const useDetailsMovie = () => {
   const baseImgUrl = config.getBaseImgUrl();
   const backdropImgUrl = config.getBackdropImgUrl();
 
-  if (error) {
-    navigate({ to: "/" });
-  }
+  useEffect(() => {
+    if (error) {
+      navigate({ to: "/" });
+    }
+  }, [error, navigate]);
 
   const imgUrl = movie?.backdropPath ? `${backdropImgUrl}/${movie.backdropPath}` : "";
 

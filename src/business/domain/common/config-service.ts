@@ -4,4 +4,5 @@ export interface IConfigService {
   getBaseImgUrl(): string;
   getBackdropImgUrl(): string;
   getLanguage(): string;
+  getUserListStorageKey(): string;
 }

@@ -18,16 +18,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "paths": {
-      "@/*": ["./src/*"],
-      "hooks/*": ["./src/hooks/*"],
-      "context/*": ["./src/context/*"],
-      "business/*": ["./src/business/*"],
-      "infrastructure/*": ["./src/infrastructure/*"],
-      "libs/*": ["./src/libs/*"],
-      "presentation/*": ["./src/presentation/*"],
-      "assets/*": ["./src/assets/*"],
-      "utils/*": ["./src/utils/*"],
-      "*": ["./src/*"]
+      "@/*": ["./src/*"]
     },
     "types": ["node", "vite/client"]
   },

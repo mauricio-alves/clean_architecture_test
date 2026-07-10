@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { container } from "libs/inversifyjs/container";
-import { MovieTokens } from "libs/inversifyjs/tokens/movie-tokens";
+import { container } from "@/libs/inversifyjs/container";
+import { MovieTokens } from "@/libs/inversifyjs/tokens/movie-tokens";
 import type { IGetMovieDetailsUseCase } from "@/business/domain/services/movie/get-movie-details";
 import AppError from "@/business/tools/app-error";
 

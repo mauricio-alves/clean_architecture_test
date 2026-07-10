@@ -1,4 +1,4 @@
-import { Movie } from "@/business/domain/models/movie/movie";
+import { GetMovieDTO } from "@/business/domain/dtos/movie/get";
 import { IGetByCategoryBaseRepository } from "../base/get-by-category";
 
-export interface IGetMoviesByCategoryRepository extends IGetByCategoryBaseRepository<Movie> {}
+export interface IGetMoviesByCategoryRepository extends IGetByCategoryBaseRepository<GetMovieDTO> {}

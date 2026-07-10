@@ -1,8 +1,8 @@
 import { injectable } from "inversify";
 import axios, { AxiosInstance } from "axios";
-import { HttpGetParams, HttpResponse, IHttpClient } from "business/domain/common/http-client";
-import { requestInterceptor } from "infrastructure/interceptors/request";
-import { responseInterceptor } from "infrastructure/interceptors/response";
+import { HttpGetParams, HttpResponse, IHttpClient } from "@/business/domain/common/http-client";
+import { requestInterceptor } from "@/infrastructure/interceptors/request";
+import { responseInterceptor } from "@/infrastructure/interceptors/response";
 
 @injectable()
 export class AxiosHttpClient implements IHttpClient {

@@ -22,14 +22,6 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-      business: path.resolve(__dirname, "./src/business"),
-      infrastructure: path.resolve(__dirname, "./src/infrastructure"),
-      libs: path.resolve(__dirname, "./src/libs"),
-      context: path.resolve(__dirname, "./src/context"),
-      hooks: path.resolve(__dirname, "./src/hooks"),
-      presentation: path.resolve(__dirname, "./src/presentation"),
-      assets: path.resolve(__dirname, "./src/assets"),
-      utils: path.resolve(__dirname, "./src/utils"),
     },
   },
   optimizeDeps: {

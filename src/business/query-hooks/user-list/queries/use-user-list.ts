@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { container } from "libs/inversifyjs/container";
-import { UserListTokens } from "libs/inversifyjs/tokens/user-list-tokens";
+import { container } from "@/libs/inversifyjs/container";
+import { UserListTokens } from "@/libs/inversifyjs/tokens/user-list-tokens";
 import type { IGetUserListUseCase } from "@/business/domain/services/user-list/get-user-list";
 import AppError from "@/business/tools/app-error";
 

@@ -35,7 +35,7 @@ export const DetailsMoviePage = () => {
         </p>
         <GenresList>
           <strong>{t("common.genres")}</strong>{" "}
-          {movie.genres?.map((genre: any) => (
+          {movie.genres?.map((genre) => (
             <span key={genre.id}>{genre.name}.</span>
           ))}
         </GenresList>

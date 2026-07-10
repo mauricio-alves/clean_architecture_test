@@ -1,4 +1,4 @@
-import styled, { css } from "libs/styled-components";
+import styled, { css } from "@/libs/styled-components";
 
 export const StyledButton = styled.button<{ $variant?: "add" | "delete" | "details" }>`
   padding: 5px 10px;

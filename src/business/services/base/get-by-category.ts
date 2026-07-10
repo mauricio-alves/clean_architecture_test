@@ -5,10 +5,18 @@ import type { IGetByCategoryBaseUseCase } from "@/business/domain/services/base/
 import type { IGetByCategoryBaseRepository } from "@/business/domain/repositories/base/get-by-category";
 
 @injectable()
-export abstract class BaseGetByCategoryUseCase<T> implements IGetByCategoryBaseUseCase<T> {
-  protected abstract get repository(): IGetByCategoryBaseRepository<T>;
+export abstract class BaseGetByCategoryUseCase<TEntity, TDto = TEntity> implements IGetByCategoryBaseUseCase<TEntity> {
+  protected abstract get repository(): IGetByCategoryBaseRepository<TDto>;
+  protected abstract toEntityList(dtos: TDto[]): TEntity[];
 
-  async execute(category: string): Promise<IAPIResponse<T[]> | AppError> {
-    return this.repository.execute(category);
+  async execute(category: string): Promise<IAPIResponse<TEntity[]> | AppError> {
+    const response = await this.repository.execute(category);
+    if (response instanceof AppError) {
+      return response;
+    }
+    return {
+      ...response,
+      data: this.toEntityList(response.data),
+    };
   }
 }

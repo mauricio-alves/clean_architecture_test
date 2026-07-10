@@ -7,10 +7,6 @@
     "@tanstack/react-query": "^5.101.2",
     "@tanstack/react-router": "^1.170.17",
     "@tanstack/router-plugin": "^1.168.19",
-    "@tanstack/zod-form-adapter": "^0.42.1",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.7",
     "i18next": "^26.3.4",
     "inversify": "^8.1.1",
@@ -27,12 +23,6 @@
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -48,10 +38,9 @@
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.18.6",
     "@babel/plugin-proposal-decorators": "^7.23.3",
-    "@types/jest": "^30.0.0",
     "@types/node": "^26.0.1",
-    "@types/react": "^19.2.17",
-    "@types/react-dom": "^19.2.3",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
     "@types/styled-components": "^5.1.36",
     "@vitejs/plugin-react": "^4.2.1",
     "babel-plugin-transform-typescript-metadata": "^0.3.2",

@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Movie } from "@/business/domain/models/movie/movie";
-import { container } from "libs/inversifyjs/container";
-import { UserListTokens } from "libs/inversifyjs/tokens/user-list-tokens";
+import { container } from "@/libs/inversifyjs/container";
+import { UserListTokens } from "@/libs/inversifyjs/tokens/user-list-tokens";
 import type { ICreateMovieInUserListUseCase } from "@/business/domain/services/user-list/create-movie-in-user-list";
 import AppError from "@/business/tools/app-error";
 

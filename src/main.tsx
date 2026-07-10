@@ -2,7 +2,7 @@ import ReactDOM from "react-dom/client";
 import { StrictMode } from "react";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "@/context/theme";
-import { GlobalStyle } from "libs/styled-components/global";
+import { GlobalStyle } from "@/libs/styled-components/global";
 import tanStackQueryClient from "@/libs/tanstack-query/query-client";
 import "reflect-metadata";
 import { RouterProvider } from "@tanstack/react-router";

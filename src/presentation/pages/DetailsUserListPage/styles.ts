@@ -1,5 +1,5 @@
 import type { ComponentType } from "react";
-import styled from "libs/styled-components";
+import styled from "@/libs/styled-components";
 import { Link, type LinkComponentProps } from "@tanstack/react-router";
 
 export const UserListContainer = styled.div`

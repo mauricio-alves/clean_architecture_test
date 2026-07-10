@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { container } from "libs/inversifyjs/container";
-import { UserListTokens } from "libs/inversifyjs/tokens/user-list-tokens";
+import { container } from "@/libs/inversifyjs/container";
+import { UserListTokens } from "@/libs/inversifyjs/tokens/user-list-tokens";
 import type { IDeleteMovieFromUserListUseCase } from "@/business/domain/services/user-list/delete-movie-from-user-list";
 import AppError from "@/business/tools/app-error";
 
